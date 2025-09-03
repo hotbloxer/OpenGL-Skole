@@ -1,0 +1,170 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\users\\p-hou\\source\\repos\\opengl\\shader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:shader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\users\\p-hou\\source\\repos\\opengl\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|C:\\Users\\p-hou\\source\\repos\\OpenGL\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\users\\p-hou\\source\\repos\\opengl\\window.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:window.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\users\\p-hou\\source\\repos\\opengl\\shader.vs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:shader.vs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\users\\p-hou\\source\\repos\\opengl\\shader.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:shader.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\users\\p-hou\\source\\repos\\opengl\\translated.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:translated.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\users\\p-hou\\source\\repos\\opengl\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\users\\p-hou\\source\\repos\\opengl\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "shader.frag",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\shader.frag",
+              "RelativeDocumentMoniker": "shader.frag",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\shader.frag",
+              "RelativeToolTip": "shader.frag",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-02T19:28:49.769Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Shader.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Shader.cs",
+              "RelativeDocumentMoniker": "Shader.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Shader.cs",
+              "RelativeToolTip": "Shader.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAYwFYAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-02T09:57:37.118Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAowDUBAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-01T18:19:57.227Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Window.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Window.cs",
+              "RelativeDocumentMoniker": "Window.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Window.cs",
+              "RelativeToolTip": "Window.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-02T09:03:34.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "shader.vs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\shader.vs",
+              "RelativeDocumentMoniker": "shader.vs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\shader.vs",
+              "RelativeToolTip": "shader.vs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-01T18:30:52.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-01T18:24:59.84Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Translated.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Translated.cs",
+              "RelativeDocumentMoniker": "Translated.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Translated.cs",
+              "RelativeToolTip": "Translated.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-01T18:19:25.695Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Form1.Designer.cs",
+              "RelativeToolTip": "Form1.Designer.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAowB4AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-01T09:06:42.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-01T09:06:39.66Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
