@@ -10,7 +10,7 @@ namespace OpenGL
 {
     internal class Shader
     {
-        public readonly int Handle;
+        public int Handle;
 
         Dictionary<string, int>  uniformsInShader;
 

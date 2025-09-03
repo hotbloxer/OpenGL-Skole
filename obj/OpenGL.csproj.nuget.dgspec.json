@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\p-hou\\source\\repos\\OpenGL\\OpenGL.csproj": {}
+    "C:\\UnityProjects\\OpenGL-Skole\\OpenGL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\p-hou\\source\\repos\\OpenGL\\OpenGL.csproj": {
+    "C:\\UnityProjects\\OpenGL-Skole\\OpenGL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\OpenGL.csproj",
+        "projectUniqueName": "C:\\UnityProjects\\OpenGL-Skole\\OpenGL.csproj",
         "projectName": "OpenGL",
-        "projectPath": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\OpenGL.csproj",
+        "projectPath": "C:\\UnityProjects\\OpenGL-Skole\\OpenGL.csproj",
         "packagesPath": "C:\\Users\\p-hou\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\obj\\",
+        "outputPath": "C:\\UnityProjects\\OpenGL-Skole\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

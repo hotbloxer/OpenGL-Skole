@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MiNZNbrjPu0=",
+  "dgSpecHash": "7/zP6Fz3bCs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\p-hou\\source\\repos\\OpenGL\\OpenGL.csproj",
+  "projectFilePath": "C:\\UnityProjects\\OpenGL-Skole\\OpenGL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\p-hou\\.nuget\\packages\\opentk\\4.9.4\\opentk.4.9.4.nupkg.sha512",
     "C:\\Users\\p-hou\\.nuget\\packages\\opentk.audio.openal\\4.9.4\\opentk.audio.openal.4.9.4.nupkg.sha512",
