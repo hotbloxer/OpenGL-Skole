@@ -20,11 +20,11 @@ namespace OpenGL
         // We modify the vertex array to include four vertices for our rectangle.
         private readonly float[] vertices =
         {
-             0.0f,  0.5f, 0.0f,  // top 
-             -0.5f,  0.5f, 0.0f, // top left
-             0.5f,  0.5f, 0.0f, // top right
-             0.5f, -0.5f, 0.0f, // bottom right
-            -0.5f, -0.5f, 0.0f, // bottom left
+             0.0f,   0.5f, 0.0f,  1.0f, 0.0f, 0.0f, // top 
+            -0.5f,   0.5f, 0.0f,  1.0f, 1.0f, 0.0f, // top left
+             0.5f,   0.5f, 0.0f,  1.0f, 0.0f, 1.0f,// top right
+             0.5f,  -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,// bottom right
+            -0.5f,  -0.5f, 0.0f,  0.0f, 0.0f, 1.0f,// bottom left
         };
 
 
@@ -101,13 +101,18 @@ namespace OpenGL
 
             GL.BindVertexArray(vertexArrayobject);
 
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3*sizeof(float), 0);
-            GL.EnableVertexAttribArray(0);
-
-
             elementArrayBuffer = GL.GenBuffer();
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, elementArrayBuffer);
             GL.BufferData(BufferTarget.ElementArrayBuffer, indicies.Length * sizeof(uint), indicies, BufferUsageHint.StaticDraw);
+
+            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 6 * sizeof(float), 0);
+            GL.EnableVertexAttribArray(0);
+
+            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 6 * sizeof(float), 3 * sizeof(float));
+            GL.EnableVertexAttribArray(1);
+
+
+
 
 
             shader = new Shader("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/shader.frag");
