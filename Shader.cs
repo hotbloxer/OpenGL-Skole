@@ -19,9 +19,13 @@ namespace OpenGL
             string vertexShaderSource = File.ReadAllText(vertexShaderPath);
             string fragmentShaderSource = File.ReadAllText(fragmentShaderPath);
 
+            
+
             int vertexShader = GL.CreateShader(ShaderType.VertexShader);
             int fragmentShader = GL.CreateShader(ShaderType.FragmentShader);
 
+            GL.ShaderSource(vertexShader, vertexShaderSource);
+            GL.ShaderSource(fragmentShader, fragmentShaderSource);
 
             GL.CompileShader(vertexShader);
             GL.CompileShader(fragmentShader);
@@ -50,11 +54,10 @@ namespace OpenGL
 
             for (int i = 0; i < antaluniforms; i++)
             {
-                string key = GL.GetActiveAttrib(Handle, i, out _, out _);
+                string key = GL.GetActiveUniform(Handle, i, out _, out _);
                 int location = GL.GetUniformLocation(Handle, key);
 
                 uniformsInShader.Add(key, location);
-
             }
         }
 
