@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Formats.Asn1.AsnWriter;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.DataFormats;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace OpenGL
@@ -110,12 +111,7 @@ namespace OpenGL
             float h = glControl1.ClientSize.Height;
             projectionModel = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), w / h, 0.1f, 100.0f);
 
-
-
-
             shader = new Shader("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/shader.frag");
-
-
 
             shader.Use();
 
@@ -125,11 +121,6 @@ namespace OpenGL
         {
             Render();
         }
-
-
-
-
-
 
         public float[] DrawSquare(Vector3 center, float width, float height, CustomColor color)
         {
@@ -158,48 +149,48 @@ namespace OpenGL
 
 
             float[] verts =
-            {
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+            {                                    //color                                          //Normal
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f, // Front face
+                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,
+                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,
+                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,
+                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,
                                                                                                
-                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f, // Back face
+                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,
+                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,
+                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,
                                                                                                
-                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f, // Left face
+                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
+                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
+                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
                                                                                                
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f, // Right face
+                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
+                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
+                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
+                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
                                                                                                
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f, -1.0f,  0.0f, // Bottom fac
+                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f, -1.0f,  0.0f,
+                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f, -1.0f,  0.0f,
+                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f, -1.0f,  0.0f,
+                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f, -1.0f,  0.0f,
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f, -1.0f,  0.0f,
                                                                                                
-                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
-                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  1.0f,  0.0f, // Top face
+                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  1.0f,  0.0f,
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  1.0f,  0.0f,
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  1.0f,  0.0f,
+                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  1.0f,  0.0f,
+                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  1.0f,  0.0f
 
             };
             return verts;
@@ -220,10 +211,7 @@ namespace OpenGL
                 this.Alpha = Alpha;
             }
         }
-
-
-
-
-
     }
 }
+  
+  
