@@ -1,5 +1,6 @@
 ﻿using OpenTK.Compute.OpenCL;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,6 +99,11 @@ namespace OpenGL
             }
         }
 
+        public void SetMatrix4(string name, Matrix4 data)
+        {
+            GL.UseProgram(Handle);
+            GL.UniformMatrix4(uniformsInShader[name], true, ref data);
+        }
 
     }
 }

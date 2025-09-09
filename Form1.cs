@@ -1,6 +1,7 @@
 using OpenTK.Compute.OpenCL;
 using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 using System;
 using System.Reflection.Metadata;
 using System.Windows.Forms;
@@ -17,49 +18,157 @@ namespace OpenGL
 
         Shader shader;
 
-        // We modify the vertex array to include four vertices for our rectangle.
-        private readonly float[] vertices =
+        //// We modify the vertex array to include four vertices for our rectangle.
+        //private readonly float[] vertices =
+        //{
+        //     0.0f,   0.5f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f, // top 
+        //    -0.5f,   0.5f, 0.0f,  1.0f, 1.0f, 0.0f, 1.0f, // top left
+        //     0.5f,   0.5f, 0.0f,  1.0f, 0.0f, 1.0f, 1.0f, // top right
+        //     0.5f,  -0.5f, 0.0f,  0.0f, 1.0f, 0.0f, 1.0f, // bottom right
+        //    -0.5f,  -0.5f, 0.0f,  0.0f, 0.0f, 1.0f, 1.0f, // bottom left
+
+
+        //    -0.5f,   0.5f, -1.0f,  1.0f, 1.0f, 0.0f, 1.0f, // top left back
+        //     0.5f,   0.5f, -1.0f,  1.0f, 0.0f, 1.0f, 1.0f, // top right back
+        //     0.5f,  -0.5f, -1.0f,  0.0f, 1.0f, 0.0f, 1.0f, // bottom right back
+        //    -0.5f,  -0.5f, -1.0f,  0.0f, 0.0f, 1.0f, 1.0f, // bottom left back
+        //};
+
+        private float[] vertices;
+        private List<float> verticesWork;
+
+        public float[] DrawSquare (Vector3 center, float width, float height,  CustomColor color)
         {
-             0.0f,   0.5f, 0.0f,  1.0f, 0.0f, 0.0f, // top 
-            -0.5f,   0.5f, 0.0f,  1.0f, 1.0f, 0.0f, // top left
-             0.5f,   0.5f, 0.0f,  1.0f, 0.0f, 1.0f,// top right
-             0.5f,  -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,// bottom right
-            -0.5f,  -0.5f, 0.0f,  0.0f, 0.0f, 1.0f,// bottom left
-        };
+            float w = width / 2;
+            float h =height / 2;
+        
+           
 
+            float[] verts =
+            {
+              center.X +  h, center.Y -  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // top left
+              center.X +  h, center.Y +  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // top right
+              center.X -  h, center.Y +  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // bottom right
+              center.X -  h, center.Y -  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // bottom left
+              center.X +  h, center.Y -  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // top left
+              center.X + -h, center.Y +  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // bottom right
+            };
+            return verts;
+        }
 
-        private readonly uint[] indicies =
+        public float[] DrawBox(Vector3 center, float width, float height, float depth, CustomColor color)
         {
-            1,2,3,
-            1,3,4,
-        };
+            float w = width / 2;
+            float h = height / 2;
+            float d = depth / 2;
 
-   
+
+
+
+            float[] verts =
+            {
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha,
+                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+               
+                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha,
+                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha,
+                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
+        
+                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha,
+                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha,
+                
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha,
+                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha,
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha,  
+                 
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha,
+                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha,
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+              
+                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha,
+                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
+                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha,
+                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
+     
+            };
+            return verts;
+        }
+
+
+
+
+        public struct CustomColor
+        {
+            public float Red;
+            public float Green;
+            public float Blue;
+            public float Alpha;
+
+            public CustomColor (float Red, float Green, float Blue, float Alpha)
+            {
+                this.Red = Red;
+                this.Green = Green;
+                this.Blue = Blue;
+                this.Alpha = Alpha;
+            }
+        }
 
         private int vertexBufferObject;
         private int vertexArrayobject;
-        private int elementArrayBuffer;
+        //private int elementArrayBuffer;
 
+
+        private Matrix4 viewModel;
+
+        private Matrix4 projectionModel;
 
         public Form1()
         {
             InitializeComponent();
 
+            vertices = DrawBox(new Vector3(0f, 0f, 0f), 1f, 1f, 1f, new CustomColor(0.5f, 0.5f, 0.5f, 1));
         }
- 
+
 
 
         private void Render()
         {
 
-            GL.Clear(ClearBufferMask.ColorBufferBit); //| gl.DEPTH_BUFFER_BIT);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             shader.Use();
 
             GL.BindVertexArray(vertexArrayobject);
 
-            GL.DrawElements(PrimitiveType.Triangles, indicies.Length, DrawElementsType.UnsignedInt, 0);
-           
+            GL.DrawArrays(PrimitiveType.Triangles, 0, vertices.Length);
+
+            Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(45)) * Matrix4.CreateRotationZ((float)MathHelper.DegreesToRadians(10));
+       
+
+
+            shader.SetMatrix4("model", model);
+            shader.SetMatrix4("view", viewModel);
+            shader.SetMatrix4("projection", projectionModel);
+
 
             glControl1.SwapBuffers();
 
@@ -78,8 +187,14 @@ namespace OpenGL
 
         private void glControl1_Load(object sender, EventArgs e)
         {
+
+
+
             glControl1.MakeCurrent();
+            
             GL.ClearColor(0.0f, 0.4f, 0.6f, 1.0f);
+
+            GL.Enable(EnableCap.DepthTest);
 
             // lav en VBO
             vertexBufferObject = GL.GenBuffer();
@@ -88,11 +203,8 @@ namespace OpenGL
             // det her er lidt ligesom at sætte et stik i en server, så der er forbindelse mellem VBO og OpenGL
             GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferObject);
 
-
             // send dataen for VBO til OpenGL med BufferData
             GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
-            //GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length, vertices, BufferUsageHint.StaticDraw); previous
-
 
 
             // opret en VAO = vertexArrayobject
@@ -101,21 +213,25 @@ namespace OpenGL
 
             GL.BindVertexArray(vertexArrayobject);
 
-            elementArrayBuffer = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, elementArrayBuffer);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, indicies.Length * sizeof(uint), indicies, BufferUsageHint.StaticDraw);
-
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 6 * sizeof(float), 0);
+            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 7 * sizeof(float), 0);
             GL.EnableVertexAttribArray(0);
 
-            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 6 * sizeof(float), 3 * sizeof(float));
+            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 7 * sizeof(float), 4 * sizeof(float));
             GL.EnableVertexAttribArray(1);
 
+
+            viewModel = Matrix4.CreateTranslation(0.0f, 0.0f, -3.0f);
+
+            float w = glControl1.ClientSize.Width;
+            float h = glControl1.ClientSize.Height;
+            projectionModel = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), w / h, 0.1f, 100.0f);
 
 
 
 
             shader = new Shader("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/shader.frag");
+
+
 
             shader.Use();
 

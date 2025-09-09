@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:shader.vs||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\shader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:shader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\shader.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:shader.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|C:\\UnityProjects\\OpenGL-Skole\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\shader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:shader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,13 +34,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAAAkwG0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAAwKcAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-03T19:18:30.215Z",
               "IsPinned": true,
@@ -54,14 +54,14 @@
               "RelativeDocumentMoniker": "shader.vs",
               "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\shader.vs",
               "RelativeToolTip": "shader.vs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-09-03T19:53:33.908Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "shader.frag",
               "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\shader.frag",
               "RelativeDocumentMoniker": "shader.frag",
@@ -74,19 +74,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Shader.cs",
               "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\Shader.cs",
               "RelativeDocumentMoniker": "Shader.cs",
               "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\Shader.cs",
               "RelativeToolTip": "Shader.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAkwF4AAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAE4AAAAAAAAAAADwv2YAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-03T10:56:28.482Z"
+              "WhenOpened": "2025-09-03T10:56:28.482Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
