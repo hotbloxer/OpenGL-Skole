@@ -18,119 +18,7 @@ namespace OpenGL
 
         Shader shader;
 
-        //// We modify the vertex array to include four vertices for our rectangle.
-        //private readonly float[] vertices =
-        //{
-        //     0.0f,   0.5f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f, // top 
-        //    -0.5f,   0.5f, 0.0f,  1.0f, 1.0f, 0.0f, 1.0f, // top left
-        //     0.5f,   0.5f, 0.0f,  1.0f, 0.0f, 1.0f, 1.0f, // top right
-        //     0.5f,  -0.5f, 0.0f,  0.0f, 1.0f, 0.0f, 1.0f, // bottom right
-        //    -0.5f,  -0.5f, 0.0f,  0.0f, 0.0f, 1.0f, 1.0f, // bottom left
-
-
-        //    -0.5f,   0.5f, -1.0f,  1.0f, 1.0f, 0.0f, 1.0f, // top left back
-        //     0.5f,   0.5f, -1.0f,  1.0f, 0.0f, 1.0f, 1.0f, // top right back
-        //     0.5f,  -0.5f, -1.0f,  0.0f, 1.0f, 0.0f, 1.0f, // bottom right back
-        //    -0.5f,  -0.5f, -1.0f,  0.0f, 0.0f, 1.0f, 1.0f, // bottom left back
-        //};
-
         private float[] vertices;
-        private List<float> verticesWork;
-
-        public float[] DrawSquare (Vector3 center, float width, float height,  CustomColor color)
-        {
-            float w = width / 2;
-            float h =height / 2;
-        
-           
-
-            float[] verts =
-            {
-              center.X +  h, center.Y -  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // top left
-              center.X +  h, center.Y +  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // top right
-              center.X -  h, center.Y +  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // bottom right
-              center.X -  h, center.Y -  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // bottom left
-              center.X +  h, center.Y -  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // top left
-              center.X + -h, center.Y +  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // bottom right
-            };
-            return verts;
-        }
-
-        public float[] DrawBox(Vector3 center, float width, float height, float depth, CustomColor color)
-        {
-            float w = width / 2;
-            float h = height / 2;
-            float d = depth / 2;
-
-
-
-
-            float[] verts =
-            {
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha,
-                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-               
-                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha,
-                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha,
-                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
-        
-                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha,
-                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha,
-                
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha,
-                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha,
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha,  
-                 
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha,
-                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha,
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-              
-                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha,
-                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 
-                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha,
-                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 
-     
-            };
-            return verts;
-        }
-
-
-
-
-        public struct CustomColor
-        {
-            public float Red;
-            public float Green;
-            public float Blue;
-            public float Alpha;
-
-            public CustomColor (float Red, float Green, float Blue, float Alpha)
-            {
-                this.Red = Red;
-                this.Green = Green;
-                this.Blue = Blue;
-                this.Alpha = Alpha;
-            }
-        }
 
         private int vertexBufferObject;
         private int vertexArrayobject;
@@ -144,8 +32,7 @@ namespace OpenGL
         public Form1()
         {
             InitializeComponent();
-
-            vertices = DrawBox(new Vector3(0f, 0f, 0f), 1f, 1f, 1f, new CustomColor(0.5f, 0.5f, 0.5f, 1));
+            vertices = DrawBox(new Vector3(0f, 0f, 0f), 1f, 1f, 1f, new CustomColor(0f, 1f, 1f, 1f));
         }
 
 
@@ -162,8 +49,6 @@ namespace OpenGL
             GL.DrawArrays(PrimitiveType.Triangles, 0, vertices.Length);
 
             Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(45)) * Matrix4.CreateRotationZ((float)MathHelper.DegreesToRadians(10));
-       
-
 
             shader.SetMatrix4("model", model);
             shader.SetMatrix4("view", viewModel);
@@ -171,8 +56,6 @@ namespace OpenGL
 
 
             glControl1.SwapBuffers();
-
-
         }
 
 
@@ -187,8 +70,6 @@ namespace OpenGL
 
         private void glControl1_Load(object sender, EventArgs e)
         {
-
-
 
             glControl1.MakeCurrent();
             
@@ -213,11 +94,14 @@ namespace OpenGL
 
             GL.BindVertexArray(vertexArrayobject);
 
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 7 * sizeof(float), 0);
+            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 10 * sizeof(float), 0);
             GL.EnableVertexAttribArray(0);
 
-            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 7 * sizeof(float), 4 * sizeof(float));
+            GL.VertexAttribPointer(1, 4, VertexAttribPointerType.Float, false, 10 * sizeof(float), 3 * sizeof(float));
             GL.EnableVertexAttribArray(1);
+
+            GL.VertexAttribPointer(2, 3, VertexAttribPointerType.Float, false, 10 * sizeof(float), 7 * sizeof(float));
+            GL.EnableVertexAttribArray(2);
 
 
             viewModel = Matrix4.CreateTranslation(0.0f, 0.0f, -3.0f);
@@ -241,5 +125,105 @@ namespace OpenGL
         {
             Render();
         }
+
+
+
+
+
+
+        public float[] DrawSquare(Vector3 center, float width, float height, CustomColor color)
+        {
+            float w = width / 2;
+            float h = height / 2;
+
+            float[] verts =
+            {
+              center.X +  h, center.Y -  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // top left
+              center.X +  h, center.Y +  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // top right
+              center.X -  h, center.Y +  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // bottom right
+              center.X -  h, center.Y -  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // bottom left
+              center.X +  h, center.Y -  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // top left
+              center.X + -h, center.Y +  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // bottom right
+            };
+            return verts;
+        }
+
+        public float[] DrawBox(Vector3 center, float width, float height, float depth, CustomColor color)
+        {
+            float w = width / 2;
+            float h = height / 2;
+            float d = depth / 2;
+
+
+
+
+            float[] verts =
+            {
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                                                                                               
+                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                                                                                               
+                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                                                                                               
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                                                                                               
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                                                                                               
+                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1f, 1f, 1f,
+
+            };
+            return verts;
+        }
+
+        public struct CustomColor
+        {
+            public float Red;
+            public float Green;
+            public float Blue;
+            public float Alpha;
+
+            public CustomColor(float Red, float Green, float Blue, float Alpha)
+            {
+                this.Red = Red;
+                this.Green = Green;
+                this.Blue = Blue;
+                this.Alpha = Alpha;
+            }
+        }
+
+
+
+
+
     }
 }
