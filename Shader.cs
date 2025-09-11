@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OpenGL
 {
@@ -62,6 +63,11 @@ namespace OpenGL
             }
         }
 
+        public void SetVec3 (string name, Vector3 value)
+        {
+            GL.UseProgram(Handle);
+            GL.Uniform3(uniformsInShader[name], ref value);
+        }
 
         public void CompileShader (int shader)
         {

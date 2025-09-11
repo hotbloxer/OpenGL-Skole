@@ -7,5 +7,5 @@ in vec4 vertexColor; // the input variable from the vertex shader (same name and
 
 void main()
 {
-    FragColor = vertexColor;
+    FragColor = vertexColor * ambient;
 }   

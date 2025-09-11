@@ -17,7 +17,7 @@ namespace OpenGL
     {
 
 
-        Shader shader;
+        Shader lightingShader;
 
         private float[] vertices;
 
@@ -33,7 +33,7 @@ namespace OpenGL
         public Form1()
         {
             InitializeComponent();
-            vertices = DrawBox(new Vector3(0f, 0f, 0f), 1f, 1f, 1f, new CustomColor(0f, 1f, 1f, 1f));
+            vertices = DrawBox(new Vector3(0f, 0f, 0f), 1f, 1f, 1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
         }
 
 
@@ -43,7 +43,7 @@ namespace OpenGL
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            shader.Use();
+            lightingShader.Use();
 
             GL.BindVertexArray(vertexArrayobject);
 
@@ -51,9 +51,13 @@ namespace OpenGL
 
             Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(45)) * Matrix4.CreateRotationZ((float)MathHelper.DegreesToRadians(10));
 
-            shader.SetMatrix4("model", model);
-            shader.SetMatrix4("view", viewModel);
-            shader.SetMatrix4("projection", projectionModel);
+            lightingShader.SetMatrix4("model", model);
+            lightingShader.SetMatrix4("view", viewModel);
+            lightingShader.SetMatrix4("projection", projectionModel);
+
+            lightingShader.SetVec3("objectColor", new Vector3(1f, 1f, 0.3f));
+
+            lightingShader.SetVec3("lightColor", new Vector3(1f, 1f, 1f));
 
 
             glControl1.SwapBuffers();
@@ -111,9 +115,10 @@ namespace OpenGL
             float h = glControl1.ClientSize.Height;
             projectionModel = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), w / h, 0.1f, 100.0f);
 
-            shader = new Shader("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/shader.frag");
+            //shader = new Shader("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/shader.frag");
+            lightingShader = new Shader("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/lighting.frag");
 
-            shader.Use();
+            lightingShader.Use();
 
         }
 
