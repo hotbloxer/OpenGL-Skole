@@ -11,12 +11,19 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
+out vec3 fragmentPosition;
+
 
 void main()
 {
 
    gl_Position = vec4(aPos, 1.0) * model * view * projection;
-   Normal = normals;
+
+
+   mat3 normalMatrix = mat3 (transpose(inverse(projection + model)));
+   Normal = normalMatrix * normals;
+
+   fragmentPosition = vec3 (model * vec4 (aPos, 1.0));
 
    vertexColor = vec4(color) ;
 }

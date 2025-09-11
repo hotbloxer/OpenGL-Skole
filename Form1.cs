@@ -30,6 +30,8 @@ namespace OpenGL
 
         private Matrix4 projectionModel;
 
+        private Vector3 lamp;
+
         public Form1()
         {
             InitializeComponent();
@@ -57,8 +59,8 @@ namespace OpenGL
 
             lightingShader.SetVec3("objectColor", new Vector3(1f, 1f, 0.3f));
 
-            lightingShader.SetVec3("lightColor", new Vector3(1f, 1f, 1f));
-
+            lightingShader.SetVec3("lightColor", new Vector3(-1f, 1f, 2f));
+            lightingShader.SetVec3("lightPosition", lamp); 
 
             glControl1.SwapBuffers();
         }
@@ -79,6 +81,8 @@ namespace OpenGL
             glControl1.MakeCurrent();
             
             GL.ClearColor(0.0f, 0.4f, 0.6f, 1.0f);
+
+            lamp = new Vector3(1,1,1);
 
             GL.Enable(EnableCap.DepthTest);
 
