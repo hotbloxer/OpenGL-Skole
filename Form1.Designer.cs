@@ -66,6 +66,7 @@ namespace OpenGL
             Controls.Add(button1);
             Controls.Add(glControl1);
             DoubleBuffered = true;
+            KeyPreview = true;
             Name = "Form1";
             Text = "Form1";
             Paint += Form1_Paint;

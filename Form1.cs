@@ -3,6 +3,7 @@ using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -16,6 +17,7 @@ namespace OpenGL
     public partial class Form1 : Form
     {
 
+        Camera camera;
 
         Shader lightingShader;
 
@@ -24,6 +26,7 @@ namespace OpenGL
         private int vertexBufferObject;
         private int vertexArrayobject;
         //private int elementArrayBuffer;
+
 
 
         private Matrix4 viewModel;
@@ -35,7 +38,25 @@ namespace OpenGL
         public Form1()
         {
             InitializeComponent();
-            vertices = DrawBox(new Vector3(0f, 0f, 0f), 1f, 1f, 1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
+
+            camera = new Camera(new Vector3(0.0f, 1.0f, -5.0f));
+
+            // fix til at vise lampe og kasse
+
+            lamp = new Vector3(0, 1.5f, 2);
+
+            float[] kasse = DrawBox(new Vector3(0f, 0f, 0f), 1f, 1f, 1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
+            float[] lampHolder = DrawBox(lamp, 0.1f, 0.1f, 0.1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
+
+            vertices = new float[lampHolder.Length + kasse.Length]; // showing box
+            Array.Copy(lampHolder, vertices, lampHolder.Length);
+            Array.Copy(kasse, 0, vertices, lampHolder.Length, kasse.Length);
+
+
+            this.KeyPreview = true; // Let the form receive key events
+            this.KeyPress += new KeyPressEventHandler(Keypressed);
+
+
         }
 
 
@@ -51,25 +72,45 @@ namespace OpenGL
 
             GL.DrawArrays(PrimitiveType.Triangles, 0, vertices.Length);
 
-            Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(45)) * Matrix4.CreateRotationZ((float)MathHelper.DegreesToRadians(10));
+            Matrix4 model = Matrix4.Identity;
+            //Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(45)) * Matrix4.CreateRotationZ((float)MathHelper.DegreesToRadians(10));
 
             lightingShader.SetMatrix4("model", model);
-            lightingShader.SetMatrix4("view", viewModel);
+            lightingShader.SetMatrix4("view", camera.GetViewMatrix());
             lightingShader.SetMatrix4("projection", projectionModel);
 
             lightingShader.SetVec3("objectColor", new Vector3(1f, 1f, 0.3f));
 
             lightingShader.SetVec3("lightColor", new Vector3(-1f, 1f, 2f));
-            lightingShader.SetVec3("lightPosition", lamp); 
+            lightingShader.SetVec3("lightPosition", lamp);
+
+            
+            lightingShader.SetVec3("viewPos", camera.GetPosition);
 
             glControl1.SwapBuffers();
+
         }
 
 
 
 
+        private void Keypressed(System.Object o, KeyPressEventArgs e)
+        {
+            // The keypressed method uses the KeyChar property to check 
+            // whether the ENTER key is pressed. 
+            camera.UpdateMovement(o, e);
+            // If the ENTER key is pressed, the Handled property is set to true, 
+            // to indicate the event is handled.
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                e.Handled = true;
+            }
+        }
+
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+                      
             Render();
         }
 
@@ -81,8 +122,6 @@ namespace OpenGL
             glControl1.MakeCurrent();
             
             GL.ClearColor(0.0f, 0.4f, 0.6f, 1.0f);
-
-            lamp = new Vector3(1,1,1);
 
             GL.Enable(EnableCap.DepthTest);
 
@@ -111,16 +150,16 @@ namespace OpenGL
 
             GL.VertexAttribPointer(2, 3, VertexAttribPointerType.Float, false, 10 * sizeof(float), 7 * sizeof(float));
             GL.EnableVertexAttribArray(2);
-
-
-            viewModel = Matrix4.CreateTranslation(0.0f, 0.0f, -3.0f);
+            
+            viewModel = camera.GetViewMatrix();
 
             float w = glControl1.ClientSize.Width;
             float h = glControl1.ClientSize.Height;
-            projectionModel = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), w / h, 0.1f, 100.0f);
+            projectionModel = camera.GetProjectionMatrix(w, h);
 
             //shader = new Shader("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/shader.frag");
             lightingShader = new Shader("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/lighting.frag");
+
 
             lightingShader.Use();
 
