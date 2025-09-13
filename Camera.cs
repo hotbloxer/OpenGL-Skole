@@ -39,10 +39,7 @@ namespace OpenGL
 
         public Matrix4 GetViewMatrix()
         {
-            Matrix4 test1 = Matrix4.CreateTranslation(cameraPosition);
-            Matrix4 test2 =
-            Matrix4.LookAt(cameraPosition, cameraPosition + front, up);
-            return test1; //TODO find ud af dette
+            return Matrix4.LookAt(cameraPosition, cameraPosition + front, Vector3.Normalize(up));
         }
 
 
@@ -60,7 +57,22 @@ namespace OpenGL
             {
                 cameraPosition.Z += 1f;
             }
-            
+
+            if (e.KeyChar == 's')
+            {
+                cameraPosition.Z -= 1f;
+            }
+
+            if (e.KeyChar == 'a')
+            {
+                cameraPosition.X += 1f;
+            }
+
+            if (e.KeyChar == 'd')
+            {
+                cameraPosition.X -= 1f;
+            }
+
         }
 
 

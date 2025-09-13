@@ -39,11 +39,11 @@ namespace OpenGL
         {
             InitializeComponent();
 
-            camera = new Camera(new Vector3(0.0f, 1.0f, -5.0f));
+            camera = new Camera(new Vector3(0.0f, 2.0f, 5.0f));
 
             // fix til at vise lampe og kasse
 
-            lamp = new Vector3(0, 1.5f, 2);
+            lamp = new Vector3(0, 1.5f, -2);
 
             float[] kasse = DrawBox(new Vector3(0f, 0f, 0f), 1f, 1f, 1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
             float[] lampHolder = DrawBox(lamp, 0.1f, 0.1f, 0.1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
@@ -99,6 +99,7 @@ namespace OpenGL
             // The keypressed method uses the KeyChar property to check 
             // whether the ENTER key is pressed. 
             camera.UpdateMovement(o, e);
+            Render();
             // If the ENTER key is pressed, the Handled property is set to true, 
             // to indicate the event is handled.
             if (e.KeyChar == (char)Keys.Return)

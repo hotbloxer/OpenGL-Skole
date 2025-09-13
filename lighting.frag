@@ -31,7 +31,7 @@ void main()
     float specularStrength = 0.5;
     vec3 viewDir = normalize(viewPos - fragmentPosition);
     vec3 reflectDir = reflect(-lightDir, normalizedNormals);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32); //The 32 is the shininess of the material.
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 254); //The 32 is the shininess of the material.
     vec3 specular = specularStrength * spec * lightColor;
 
     vec3 result = (ambient + diffuse + specular) * objectColor;
