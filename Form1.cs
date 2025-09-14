@@ -1,3 +1,4 @@
+using OpenGL.primitives;
 using OpenTK.Compute.OpenCL;
 using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL4;
@@ -17,7 +18,7 @@ namespace OpenGL
     public partial class Form1 : Form
     {
 
-        Camera camera;
+        ICamera camera;
 
         Shader lightingShader;
 
@@ -27,7 +28,8 @@ namespace OpenGL
         private int vertexArrayobject;
         //private int elementArrayBuffer;
 
-
+        IPrimitive3d box;
+        IPrimitive2d quad;
 
         private Matrix4 viewModel;
 
@@ -43,7 +45,10 @@ namespace OpenGL
 
             // fix til at vise lampe og kasse
 
-            lamp = new Vector3(0, 1.5f, -2);
+            lamp = new Vector3(0, 1.5f, 2);
+
+            box = new BoxGeometry();
+            quad = new Square();
 
             float[] kasse = DrawBox(new Vector3(0f, 0f, 0f), 1f, 1f, 1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
             float[] lampHolder = DrawBox(lamp, 0.1f, 0.1f, 0.1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
@@ -55,6 +60,7 @@ namespace OpenGL
 
             this.KeyPreview = true; // Let the form receive key events
             this.KeyPress += new KeyPressEventHandler(Keypressed);
+
 
 
         }
@@ -84,7 +90,7 @@ namespace OpenGL
             lightingShader.SetVec3("lightColor", new Vector3(-1f, 1f, 2f));
             lightingShader.SetVec3("lightPosition", lamp);
 
-            
+
             lightingShader.SetVec3("viewPos", camera.GetPosition);
 
             glControl1.SwapBuffers();
@@ -98,8 +104,14 @@ namespace OpenGL
         {
             // The keypressed method uses the KeyChar property to check 
             // whether the ENTER key is pressed. 
-            camera.UpdateMovement(o, e);
+
+            if (e.KeyChar == 'w') camera.UpdateCameraMovement(ICamera.CameraMovement.UP);
+            else if (e.KeyChar == 'a') camera.UpdateCameraMovement(ICamera.CameraMovement.LEFT);
+            else if (e.KeyChar == 'd') camera.UpdateCameraMovement(ICamera.CameraMovement.RIGHT);
+            if (e.KeyChar == 's') camera.UpdateCameraMovement(ICamera.CameraMovement.DOWN);
+
             Render();
+
             // If the ENTER key is pressed, the Handled property is set to true, 
             // to indicate the event is handled.
             if (e.KeyChar == (char)Keys.Return)
@@ -111,17 +123,15 @@ namespace OpenGL
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-                      
+
             Render();
         }
 
 
-
-        private void glControl1_Load(object sender, EventArgs e)
+        private void Load()
         {
-
             glControl1.MakeCurrent();
-            
+
             GL.ClearColor(0.0f, 0.4f, 0.6f, 1.0f);
 
             GL.Enable(EnableCap.DepthTest);
@@ -151,7 +161,7 @@ namespace OpenGL
 
             GL.VertexAttribPointer(2, 3, VertexAttribPointerType.Float, false, 10 * sizeof(float), 7 * sizeof(float));
             GL.EnableVertexAttribArray(2);
-            
+
             viewModel = camera.GetViewMatrix();
 
             float w = glControl1.ClientSize.Width;
@@ -159,11 +169,15 @@ namespace OpenGL
             projectionModel = camera.GetProjectionMatrix(w, h);
 
             //shader = new Shader("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/shader.frag");
-            lightingShader = new Shader("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/lighting.frag");
+            lightingShader = new Shader("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/cellShaded.frag");
 
 
             lightingShader.Use();
+        }
 
+        private void glControl1_Load(object sender, EventArgs e)
+        {
+            Load();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -173,93 +187,25 @@ namespace OpenGL
 
         public float[] DrawSquare(Vector3 center, float width, float height, CustomColor color)
         {
-            float w = width / 2;
-            float h = height / 2;
-
-            float[] verts =
-            {
-              center.X +  h, center.Y -  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // top left
-              center.X +  h, center.Y +  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // top right
-              center.X -  h, center.Y +  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // bottom right
-              center.X -  h, center.Y -  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // bottom left
-              center.X +  h, center.Y -  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // top left
-              center.X + -h, center.Y +  w, center.Z, color.Red, color.Green, color.Blue, color.Alpha, // bottom right
-            };
-            return verts;
+            return quad.GetShape(center, width, height, color);
         }
 
         public float[] DrawBox(Vector3 center, float width, float height, float depth, CustomColor color)
         {
-            float w = width / 2;
-            float h = height / 2;
-            float d = depth / 2;
-
-
-
-
-            float[] verts =
-            {                                    //color                                          //Normal
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f, // Front face
-                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,
-                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,
-                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,
-                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,
-                                                                                               
-                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f, // Back face
-                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,
-                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,
-                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,
-                                                                                               
-                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f, // Left face
-                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
-                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
-                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
-                                                                                               
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f, // Right face
-                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
-                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
-                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
-                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 1.0f,  0.0f,  0.0f,
-                                                                                               
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f, -1.0f,  0.0f, // Bottom fac
-                  center.X  +w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f, -1.0f,  0.0f,
-                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f, -1.0f,  0.0f,
-                  center.X  +w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f, -1.0f,  0.0f,
-                  center.X  -w, center.Y -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f, -1.0f,  0.0f,
-                  center.X  -w, center.Y -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f, -1.0f,  0.0f,
-                                                                                               
-                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  1.0f,  0.0f, // Top face
-                  center.X  +w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  1.0f,  0.0f,
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  1.0f,  0.0f,
-                  center.X  +w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  1.0f,  0.0f,
-                  center.X  -w, center.Y +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  1.0f,  0.0f,
-                  center.X  -w, center.Y +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  1.0f,  0.0f
-
-            };
-            return verts;
+            return box.GetShape(center, width, height, depth, color);
         }
 
-        public struct CustomColor
+        private void glControl1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            public float Red;
-            public float Green;
-            public float Blue;
-            public float Alpha;
 
-            public CustomColor(float Red, float Green, float Blue, float Alpha)
-            {
-                this.Red = Red;
-                this.Green = Green;
-                this.Blue = Blue;
-                this.Alpha = Alpha;
-            }
         }
+
+        private void glControl1_Paint(object sender, PaintEventArgs e)
+        {
+            Render();
+        }
+
+
     }
 }
   

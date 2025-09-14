@@ -3,20 +3,40 @@
   "WorkspaceRootPath": "C:\\UnityProjects\\OpenGL-Skole\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\primitives\\square.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:primitives\\square.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\primitives\\iprimitive2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:primitives\\iprimitive2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\primitives\\iprimitive3d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:primitives\\iprimitive3d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\primitives\\boxgeometry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:primitives\\boxgeometry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\lighting.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:lighting.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|C:\\UnityProjects\\OpenGL-Skole\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\cellshaded.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:cellshaded.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\shader.vs||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -30,17 +50,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAjwC0AAAApAAAAAAAAAA==",
+              "ViewState": "AgIAACsAAAAAAAAAAAAgwDIAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-03T19:18:30.215Z",
               "IsPinned": true,
@@ -48,20 +68,85 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "Square.cs",
+              "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\primitives\\Square.cs",
+              "RelativeDocumentMoniker": "primitives\\Square.cs",
+              "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\primitives\\Square.cs",
+              "RelativeToolTip": "primitives\\Square.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T05:11:54.785Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IPrimitive2d.cs",
+              "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\primitives\\IPrimitive2d.cs",
+              "RelativeDocumentMoniker": "primitives\\IPrimitive2d.cs",
+              "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\primitives\\IPrimitive2d.cs",
+              "RelativeToolTip": "primitives\\IPrimitive2d.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T05:11:05.472Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BoxGeometry.cs",
+              "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\primitives\\BoxGeometry.cs",
+              "RelativeDocumentMoniker": "primitives\\BoxGeometry.cs",
+              "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\primitives\\BoxGeometry.cs",
+              "RelativeToolTip": "primitives\\BoxGeometry.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAuwAMAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T05:03:29.491Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IPrimitive3d.cs",
+              "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\primitives\\IPrimitive3d.cs",
+              "RelativeDocumentMoniker": "primitives\\IPrimitive3d.cs",
+              "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\primitives\\IPrimitive3d.cs",
+              "RelativeToolTip": "primitives\\IPrimitive3d.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T04:44:44.222Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "lighting.frag",
+              "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\lighting.frag",
+              "RelativeDocumentMoniker": "lighting.frag",
+              "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\lighting.frag",
+              "RelativeToolTip": "lighting.frag",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-13T17:19:14.364Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Camera.cs",
               "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\Camera.cs",
               "RelativeDocumentMoniker": "Camera.cs",
               "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\Camera.cs",
               "RelativeToolTip": "Camera.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAAwCgAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAADUAAAAAAAAAAAAowFQAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-12T16:48:33.006Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "shader.vs",
               "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\shader.vs",
               "RelativeDocumentMoniker": "shader.vs",
@@ -73,20 +158,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "lighting.frag",
-              "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\lighting.frag",
-              "RelativeDocumentMoniker": "lighting.frag",
-              "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\lighting.frag",
-              "RelativeToolTip": "lighting.frag",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACEAAAAyAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "cellShaded.frag",
+              "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\cellShaded.frag",
+              "RelativeDocumentMoniker": "cellShaded.frag",
+              "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\cellShaded.frag",
+              "RelativeToolTip": "cellShaded.frag",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-09-11T11:43:39.956Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",

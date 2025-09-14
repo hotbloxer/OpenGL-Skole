@@ -32,6 +32,7 @@ namespace OpenGL
         {
             glControl1 = new GLControl();
             button1 = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // glControl1
@@ -47,6 +48,7 @@ namespace OpenGL
             glControl1.Size = new Size(545, 426);
             glControl1.TabIndex = 0;
             glControl1.Load += glControl1_Load;
+            glControl1.Paint += glControl1_Paint;
             // 
             // button1
             // 
@@ -58,11 +60,21 @@ namespace OpenGL
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // button2
+            // 
+            button2.Location = new Point(599, 114);
+            button2.Name = "button2";
+            button2.Size = new Size(112, 34);
+            button2.TabIndex = 2;
+            button2.Text = "Phong";
+            button2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(glControl1);
             DoubleBuffered = true;
@@ -76,8 +88,6 @@ namespace OpenGL
         #endregion
         private Button button1;
         private OpenTK.GLControl.GLControl glControl1;
-
-        
-       
+        private Button button2;
     }
 }
