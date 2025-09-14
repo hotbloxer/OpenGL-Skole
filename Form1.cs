@@ -18,86 +18,24 @@ namespace OpenGL
     public partial class Form1 : Form
     {
 
+        IUseOpenGL openGL;
+
         ICamera camera;
 
-        Shader lightingShader;
-
-        private float[] vertices;
-
-        private int vertexBufferObject;
-        private int vertexArrayobject;
-        //private int elementArrayBuffer;
-
-        IPrimitive3d box;
-        IPrimitive2d quad;
-
-        private Matrix4 viewModel;
-
-        private Matrix4 projectionModel;
-
-        private Vector3 lamp;
 
         public Form1()
         {
             InitializeComponent();
 
+            openGL = new OpenGLProcesses();
+
             camera = new Camera(new Vector3(0.0f, 2.0f, 5.0f));
 
-            // fix til at vise lampe og kasse
-
-            lamp = new Vector3(0, 1.5f, 2);
-
-            box = new BoxGeometry();
-            quad = new Square();
-
-            float[] kasse = DrawBox(new Vector3(0f, 0f, 0f), 1f, 1f, 1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
-            float[] lampHolder = DrawBox(lamp, 0.1f, 0.1f, 0.1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
-
-            vertices = new float[lampHolder.Length + kasse.Length]; // showing box
-            Array.Copy(lampHolder, vertices, lampHolder.Length);
-            Array.Copy(kasse, 0, vertices, lampHolder.Length, kasse.Length);
-
+            openGL.Initialize(glControl1, camera);
 
             this.KeyPreview = true; // Let the form receive key events
             this.KeyPress += new KeyPressEventHandler(Keypressed);
-
-
-
         }
-
-
-
-        private void Render()
-        {
-
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-            lightingShader.Use();
-
-            GL.BindVertexArray(vertexArrayobject);
-
-            GL.DrawArrays(PrimitiveType.Triangles, 0, vertices.Length);
-
-            Matrix4 model = Matrix4.Identity;
-            //Matrix4 model = Matrix4.Identity * Matrix4.CreateRotationX((float)MathHelper.DegreesToRadians(45)) * Matrix4.CreateRotationZ((float)MathHelper.DegreesToRadians(10));
-
-            lightingShader.SetMatrix4("model", model);
-            lightingShader.SetMatrix4("view", camera.GetViewMatrix());
-            lightingShader.SetMatrix4("projection", projectionModel);
-
-            lightingShader.SetVec3("objectColor", new Vector3(1f, 1f, 0.3f));
-
-            lightingShader.SetVec3("lightColor", new Vector3(-1f, 1f, 2f));
-            lightingShader.SetVec3("lightPosition", lamp);
-
-
-            lightingShader.SetVec3("viewPos", camera.GetPosition);
-
-            glControl1.SwapBuffers();
-
-        }
-
-
 
 
         private void Keypressed(System.Object o, KeyPressEventArgs e)
@@ -110,7 +48,7 @@ namespace OpenGL
             else if (e.KeyChar == 'd') camera.UpdateCameraMovement(ICamera.CameraMovement.RIGHT);
             if (e.KeyChar == 's') camera.UpdateCameraMovement(ICamera.CameraMovement.DOWN);
 
-            Render();
+            openGL.Render();
 
             // If the ENTER key is pressed, the Handled property is set to true, 
             // to indicate the event is handled.
@@ -124,55 +62,13 @@ namespace OpenGL
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
 
-            Render();
+            openGL.Render();
         }
 
 
         private void Load()
         {
-            glControl1.MakeCurrent();
-
-            GL.ClearColor(0.0f, 0.4f, 0.6f, 1.0f);
-
-            GL.Enable(EnableCap.DepthTest);
-
-            // lav en VBO
-            vertexBufferObject = GL.GenBuffer();
-
-            // bind bufferens type til VBO'en
-            // det her er lidt ligesom at sætte et stik i en server, så der er forbindelse mellem VBO og OpenGL
-            GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferObject);
-
-            // send dataen for VBO til OpenGL med BufferData
-            GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
-
-
-            // opret en VAO = vertexArrayobject
-            // denne beskriver hvilke floats i VBO'en der repræsentere hvad.
-            vertexArrayobject = GL.GenVertexArray();
-
-            GL.BindVertexArray(vertexArrayobject);
-
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 10 * sizeof(float), 0);
-            GL.EnableVertexAttribArray(0);
-
-            GL.VertexAttribPointer(1, 4, VertexAttribPointerType.Float, false, 10 * sizeof(float), 3 * sizeof(float));
-            GL.EnableVertexAttribArray(1);
-
-            GL.VertexAttribPointer(2, 3, VertexAttribPointerType.Float, false, 10 * sizeof(float), 7 * sizeof(float));
-            GL.EnableVertexAttribArray(2);
-
-            viewModel = camera.GetViewMatrix();
-
-            float w = glControl1.ClientSize.Width;
-            float h = glControl1.ClientSize.Height;
-            projectionModel = camera.GetProjectionMatrix(w, h);
-
-            //shader = new Shader("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/shader.frag");
-            lightingShader = new Shader("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/cellShaded.frag");
-
-
-            lightingShader.Use();
+            openGL.Load();
         }
 
         private void glControl1_Load(object sender, EventArgs e)
@@ -182,18 +78,9 @@ namespace OpenGL
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Render();
+            openGL.Render();
         }
 
-        public float[] DrawSquare(Vector3 center, float width, float height, CustomColor color)
-        {
-            return quad.GetShape(center, width, height, color);
-        }
-
-        public float[] DrawBox(Vector3 center, float width, float height, float depth, CustomColor color)
-        {
-            return box.GetShape(center, width, height, depth, color);
-        }
 
         private void glControl1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -202,7 +89,7 @@ namespace OpenGL
 
         private void glControl1_Paint(object sender, PaintEventArgs e)
         {
-            Render();
+            openGL.Render();
         }
 
 
