@@ -4,6 +4,7 @@ out vec4 FragColor;
 in vec3 Normal;
 in vec4 vertexColor;
 in vec3 fragmentPosition;
+in vec2 uv;
 
 uniform vec3 lightColor;
 uniform vec3 lightPosition;
@@ -11,6 +12,8 @@ uniform vec3 lightPosition;
 uniform vec3 objectColor;
 
 uniform vec3 viewPos;
+
+uniform sampler2D texture0;
 
 
 
@@ -36,5 +39,12 @@ void main()
 
     vec3 result = (ambient + diffuse + specular) * objectColor;
 
-    FragColor = vec4 (result, 1.0);
+    
+
+    vec4 pixel = texture2D(texture0, uv);
+
+    //FragColor = pixel;
+    FragColor = vec4 (result, 1.0) * pixel;
+    //FragColor = vec4(uv, 0.0, 1.0);
+
 }   

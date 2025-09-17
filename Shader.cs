@@ -10,7 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OpenGL
 {
-    internal class Shader
+    public class Shader
     {
         public int Handle;
 

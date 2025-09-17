@@ -1,17 +1,8 @@
-using OpenGL.primitives;
-using OpenTK.Compute.OpenCL;
+
 using OpenTK.GLControl;
-using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System;
-using System.Reflection;
-using System.Reflection.Metadata;
-using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Formats.Asn1.AsnWriter;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using static System.Windows.Forms.DataFormats;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 namespace OpenGL
 {
@@ -21,17 +12,24 @@ namespace OpenGL
         IUseOpenGL openGL;
 
         ICamera camera;
+        ILamp lamp;
 
 
         public Form1()
         {
             InitializeComponent();
 
-            openGL = new OpenGLProcesses();
+            hScrollBar1.Minimum = 0;
+            hScrollBar1.Maximum = 360;
 
-            camera = new Camera(new Vector3(0.0f, 2.0f, 5.0f));
+            bool BlinnEnabled = true;
+            Blinn.Enabled = false;
 
-            openGL.Initialize(glControl1, camera);
+            camera = new Camera(new Vector3(0.0f, 1.0f, 5.0f));
+            lamp = new Lamp(new Vector3(0, 2f, -2));
+
+
+            openGL = new OpenGLProcesses(glControl1, camera, lamp);
 
             this.KeyPreview = true; // Let the form receive key events
             this.KeyPress += new KeyPressEventHandler(Keypressed);
@@ -61,7 +59,6 @@ namespace OpenGL
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-
             openGL.Render();
         }
 
@@ -92,7 +89,63 @@ namespace OpenGL
             openGL.Render();
         }
 
+        private void hScrollBar1_ValueChanged(object sender, EventArgs e)
+        {
+            float progressValue = hScrollBar1.Value; // vinkel degree 0 - 360
 
+            float xLocation = (float)Math.Cos(MathHelper.DegreesToRadians(progressValue));
+            float yLocation = (float)Math.Sin(MathHelper.DegreesToRadians(progressValue));
+
+            Vector3 newLocation = new(xLocation, lamp.Position.Y, yLocation);
+
+            lamp.Position = newLocation;
+
+            openGL.Render();
+        }
+
+        bool BlinnEnabled = true;
+
+        private void Phong_Click(object sender, EventArgs e)
+        {
+            Phong.Enabled = false;
+            Blinn.Enabled = true;
+
+            Shader phongShader = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/lightingPhong.frag");
+
+            //Shader phongShader = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/cellShaded.frag");
+
+            openGL.ChangeLightingShader(phongShader);
+        }
+
+        private void Blinn_Click(object sender, EventArgs e)
+        {
+            Phong.Enabled = true;
+            Blinn.Enabled = false;
+            Shader blinnShader = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/lighting.frag");
+
+            openGL.ChangeLightingShader(blinnShader);
+        }
+
+        private void ToonShader_Click(object sender, EventArgs e)
+        {
+            Phong.Enabled = false;
+            Blinn.Enabled = true;
+
+
+            Shader CellShading = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/cellShaded.frag");
+
+            openGL.ChangeLightingShader(CellShading);
+        }
+
+        private void RimLightEnabled(object sender, EventArgs e)
+        {
+            openGL.ToggleRimLight(RimLight.Checked);
+        }
+
+        private void ToonState(object sender, EventArgs e)
+        {
+            openGL.SetToonShading(checkBoxToon.Checked);
+        }
     }
 }
   

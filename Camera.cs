@@ -27,7 +27,10 @@ namespace OpenGL
 
 
         public Vector3 GetPosition { get => cameraPosition;}
+        public Vector3 SetPosition { get => cameraPosition; }
+
         public Vector3 GetDirection { get => cameraDirection;}
+        Vector3 ICamera.SetPosition { set => cameraPosition = value; }
 
         public Camera (Vector3 position)
         {
@@ -90,6 +93,7 @@ namespace OpenGL
     public interface ICamera
     {
         Vector3 GetPosition { get; }
+        Vector3 SetPosition { set; }
         Vector3 GetDirection { get; }
 
         void UpdateCameraMovement(CameraMovement movement);
