@@ -15,37 +15,74 @@ namespace OpenGL
         public int Handle;
 
         Dictionary<string, int>  uniformsInShader;
+        private string vertexShaderPath;
+        private string fragmentShaderPath;
 
+
+        // use first since GL operations cannot happen in the constructor of the Form
+ 
         public Shader (string vertexShaderPath, string fragmentShaderPath)
         {
-            string vertexShaderSource = File.ReadAllText(vertexShaderPath);
+            this.vertexShaderPath = vertexShaderPath;
+            this.fragmentShaderPath = fragmentShaderPath;
+        }
+
+        private int LoadFragmentShader ()
+        {
             string fragmentShaderSource = File.ReadAllText(fragmentShaderPath);
-
-            
-
-            int vertexShader = GL.CreateShader(ShaderType.VertexShader);
             int fragmentShader = GL.CreateShader(ShaderType.FragmentShader);
-
-            GL.ShaderSource(vertexShader, vertexShaderSource);
             GL.ShaderSource(fragmentShader, fragmentShaderSource);
-
-            GL.CompileShader(vertexShader);
             GL.CompileShader(fragmentShader);
-
-            Handle = GL.CreateProgram();
-
-            GL.AttachShader(Handle, vertexShader);
             GL.AttachShader(Handle, fragmentShader);
+
+            return fragmentShader;
+        }
+
+        private int LoadVertexShader()
+        {
+            string vertexShaderSource = File.ReadAllText(vertexShaderPath);
+            int vertexShader = GL.CreateShader(ShaderType.VertexShader);
+            GL.ShaderSource(vertexShader, vertexShaderSource);
+            GL.CompileShader(vertexShader);
+            GL.AttachShader(Handle, vertexShader);
+
+            return vertexShader;
+        }
+
+
+
+
+        public void LoadNewFragmentShader(string fragmentShaderPath)
+        {
+            this.fragmentShaderPath = fragmentShaderPath;
+            Init();
+        }
+
+        private void DetacthAndDelete (int handle, int shader)
+        {
+            GL.DetachShader(handle, shader);
+            GL.DeleteShader(shader);
+        }
+
+        public void Init()
+        {
+            Handle = GL.CreateProgram();
+            int vertexShader = LoadVertexShader();
+            int fragmentShader = LoadFragmentShader();
+
 
 
             LinkProgram(Handle);
 
+            DetacthAndDelete(Handle, vertexShader);
+            DetacthAndDelete(Handle, fragmentShader);
 
-            // when attached, the shaders are no longer needed
-            GL.DetachShader(Handle, vertexShader);
-            GL.DetachShader(Handle, fragmentShader);
-            GL.DeleteShader(vertexShader);
-            GL.DeleteShader(fragmentShader);
+
+            //// when attached, the shaders are no longer needed
+            //GL.DetachShader(Handle, vertexShader);
+            //GL.DetachShader(Handle, fragmentShader);
+            //GL.DeleteShader(vertexShader);
+            //GL.DeleteShader(fragmentShader);
 
 
 

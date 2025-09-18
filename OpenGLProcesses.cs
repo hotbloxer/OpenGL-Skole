@@ -34,6 +34,10 @@ namespace OpenGL
 
         IPrimitive3d box;
 
+        Object box1;
+        Object box2;
+
+
 
 
         private bool rimShaderEnabled = false;
@@ -48,18 +52,60 @@ namespace OpenGL
 
             this.lamp = lamp;
 
-            box = new BoxGeometry();
+            //box = new BoxGeometry();
 
-            float[] kasse = box.GetShape(new Vector3(0f, 0f, 0f), 1f, 1f, 1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
-            float[] lampHolder = box.GetShape(lamp.Position, 0.1f, 0.1f, 0.1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
 
-            vertices = new float[lampHolder.Length + kasse.Length]; // showing box
-            Array.Copy(lampHolder, vertices, lampHolder.Length);
-            Array.Copy(kasse, 0, vertices, lampHolder.Length, kasse.Length);
+
+            //lightingShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader.frag");
+
+
+            lightingShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader.frag");
+            toonShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader.frag");
+            // shader will be null here
+            box1 = new BoxFigure(1,1,1, new CustomColor(1,1,0,1), lightingShader);
+            box1 = new BoxFigure(1,0.5f ,2, new CustomColor(1, 0, 0, 1), toonShader);
+
+            
+            //float[] kasse = box.GetShape(new Vector3(0f, 0f, 0f), 1f, 1f, 1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
+            //float[] lampHolder = box.GetShape(lamp.Position, 0.1f, 0.1f, 0.1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
+
+            //vertices = new float[lampHolder.Length + kasse.Length]; // showing box
+            //Array.Copy(lampHolder, vertices, lampHolder.Length);
+            //Array.Copy(kasse, 0, vertices, lampHolder.Length, kasse.Length);
+
+
+        }
+
+        public void Load ()
+        {
+            glControl.MakeCurrent();
+
+            GL.ClearColor(0.0f, 0.4f, 0.6f, 1.0f);
+            GL.Enable(EnableCap.DepthTest);
+
+            toonShader.LoadNewFragmentShader("C:/UnityProjects/OpenGL-Skole/simpleShader2.frag");
+            //toonShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader2.frag");
+
+
+            LoadAllMeshes();
+
+            //lightingShader.Use();
+
+        }
+
+        private void LoadAllMeshes ()
+        {
+            foreach (Object obj in Object.Objects)
+            {
+                if (obj is IHaveMesh mesh)
+                {
+                    mesh.LoadMesh();
+                }
+            }
         }
 
 
-        public void Load()
+        public void Load2()
         {
             glControl.MakeCurrent();
 
@@ -122,9 +168,6 @@ namespace OpenGL
 
         public int CreateTexture (int width, int height, bool alpha, byte[] pixels, ushort unit)
         {
-
-            
-
             GL.ActiveTexture(TextureUnit.Texture0 + unit);
 
             int textureID = 0;
@@ -194,14 +237,33 @@ namespace OpenGL
             public byte     descriptor;
         }
 
+
         public void Render()
+        {
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+            RenderAllMeshes();
+        }
+
+        private void RenderAllMeshes()
+        {
+            foreach (Object obj in Object.Objects)
+            {
+                if (obj is IHaveMesh mesh)
+                {
+                    mesh.RenderMesh();
+                }
+            }
+            glControl.SwapBuffers();
+        }
+
+        public void Render2()
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             Matrix4 model = Matrix4.Identity;
 
             if (rimShaderEnabled)
             {
-
                 GL.DepthMask(false);
 
                 rimShader.SetMatrix4("model", Matrix4.CreateScale(1.2f));
