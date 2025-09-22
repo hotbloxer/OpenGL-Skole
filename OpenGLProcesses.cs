@@ -88,11 +88,11 @@ namespace OpenGL
             projectionModel = camera.GetProjectionMatrix(w, h);
             viewModel = camera.GetViewMatrix();
 
-            CurrentShader = new PhongShader(ref viewModel, ref projectionModel, lamp, camera);
+            //CurrentShader = new PhongShader(ref viewModel, ref projectionModel, lamp, camera);
+            //CurrentShader = new ToonShader(ref viewModel, ref projectionModel, lamp);
+            CurrentShader = new TexturedShader(ref viewModel, ref projectionModel, lamp, camera);
 
 
-
-            // shader will be null here
             box1 = new BoxFigure(1, 1, 1, new CustomColor(1, 1, 0, 1), CurrentShader);
             box1 = new BoxFigure(1, 0.5f, 2, new CustomColor(1, 0, 0, 1), CurrentShader);
 

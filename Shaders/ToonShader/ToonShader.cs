@@ -14,12 +14,15 @@ namespace OpenGL.Shaders.ToonShader
         private static readonly string fragmentShaderPath = "C:/UnityProjects/OpenGL-Skole/Shaders/ToonShader/ToonShader.frag";
         private readonly Matrix4 view;
         private readonly Matrix4 projection;
-        private readonly Vector3 lightPosition;
+        private readonly ILamp lamp;
 
 
-
-        public ToonShader() : base(vertexShaderPath, fragmentShaderPath)
+        public ToonShader(ref Matrix4 view, ref Matrix4 projection, ILamp lamp) : base(vertexShaderPath, fragmentShaderPath)
         {
+            this.view = view;
+            this.projection = projection;
+            this.lamp = lamp;
+
 
         }
 
@@ -28,7 +31,7 @@ namespace OpenGL.Shaders.ToonShader
 
             SetMatrix4("view", view);
             SetMatrix4("projection", projection);
-            SetVec3("lightPosition", lightPosition);
+            SetVec3("lightPosition", lamp.Position);
 
             base.Use();
 
