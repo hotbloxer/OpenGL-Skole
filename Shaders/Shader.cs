@@ -8,15 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace OpenGL
+namespace OpenGL.Shaders
 {
-    public class Shader
+    public abstract class Shader
     {
         public int Handle;
 
         Dictionary<string, int>  uniformsInShader;
         private string vertexShaderPath;
         private string fragmentShaderPath;
+
+ 
 
 
         // use first since GL operations cannot happen in the constructor of the Form
@@ -70,8 +72,6 @@ namespace OpenGL
             int vertexShader = LoadVertexShader();
             int fragmentShader = LoadFragmentShader();
 
-
-
             LinkProgram(Handle);
 
             DetacthAndDelete(Handle, vertexShader);
@@ -106,6 +106,14 @@ namespace OpenGL
             GL.Uniform3(uniformsInShader[name], ref value);
         }
 
+        public void SetVec4(string name, Vector4 value)
+        {
+            GL.UseProgram(Handle);
+            GL.Uniform4(uniformsInShader[name], ref value);
+        }
+
+
+
         public void CompileShader (int shader)
         {
             // try to compile shader
@@ -121,10 +129,14 @@ namespace OpenGL
 
         }
 
-        public void Use()
+
+        
+        public virtual void Use()
         {
             GL.UseProgram(Handle);
+
         }
+
 
 
 
@@ -148,5 +160,10 @@ namespace OpenGL
             GL.UniformMatrix4(uniformsInShader[name], true, ref data);
         }
 
+    }
+
+    public interface IShader
+    {
+        void Use();
     }
 }

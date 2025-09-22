@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OpenGL.Shaders;
+using OpenTK.Mathematics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +15,7 @@ namespace OpenGL.primitives
     {
         private Shader shader;
         IHaveMesh meshBuffer;
+
         public BoxFigure(float height, float width, float depth, CustomColor color, Shader shader)
         {
             this.shader = shader;
@@ -22,6 +25,9 @@ namespace OpenGL.primitives
       
         public void RenderMesh ()
         {
+
+            shader.SetMatrix4("model", modelView);
+
             meshBuffer.RenderMesh();
             shader.Use();
 
@@ -29,6 +35,7 @@ namespace OpenGL.primitives
 
         public void LoadMesh ()
         {
+            
             meshBuffer.LoadMesh();
             shader.Init();
 

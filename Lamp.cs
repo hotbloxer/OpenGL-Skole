@@ -9,7 +9,9 @@ namespace OpenGL
 {
     internal class Lamp : ILamp
     {
-        Vector3 position ;
+        Vector3 position;
+        private  Vector4 color;
+       
 
         public Lamp (Vector3 position)
         {
@@ -17,6 +19,7 @@ namespace OpenGL
         }
 
         public Vector3 Position { get => position; set => position = value; }
+        public Vector4 Color { get => color; set => color = value; }
     }
 
 
@@ -24,5 +27,7 @@ namespace OpenGL
     public interface ILamp
     {
         Vector3 Position { get; set; }
+
+        Vector4 Color { get; set; }
     }
 }

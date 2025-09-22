@@ -1,4 +1,5 @@
 
+using OpenGL.Shaders;
 using OpenTK.GLControl;
 using OpenTK.Mathematics;
 using System;
@@ -110,7 +111,7 @@ namespace OpenGL
             Phong.Enabled = false;
             Blinn.Enabled = true;
 
-            Shader phongShader = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/lightingPhong.frag");
+            StandardShader phongShader = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/lightingPhong.frag");
 
             //Shader phongShader = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/cellShaded.frag");
 
@@ -121,7 +122,7 @@ namespace OpenGL
         {
             Phong.Enabled = true;
             Blinn.Enabled = false;
-            Shader blinnShader = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/lighting.frag");
+            StandardShader blinnShader = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/lighting.frag");
 
             openGL.ChangeLightingShader(blinnShader);
         }
@@ -132,7 +133,7 @@ namespace OpenGL
             Blinn.Enabled = true;
 
 
-            Shader CellShading = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/cellShaded.frag");
+            StandardShader CellShading = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/cellShaded.frag");
 
             openGL.ChangeLightingShader(CellShading);
         }

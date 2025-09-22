@@ -13,10 +13,11 @@ namespace OpenGL
 
         public readonly Vector3 Position;
 
-        public readonly Matrix4 modelView; //TODO find ud af om den skal være her
+        public readonly Matrix4 modelView; 
 
         public Object() 
         {
+            modelView = Matrix4.Identity;
             Position = Vector3.Zero;
             SetObject(this);
         }

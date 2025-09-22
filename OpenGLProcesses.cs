@@ -1,5 +1,8 @@
 ﻿using Microsoft.VisualBasic.ApplicationServices;
 using OpenGL.primitives;
+using OpenGL.Shaders;
+using OpenGL.Shaders.PhongShader;
+using OpenGL.Shaders.ToonShader;
 using OpenTK.Compute.OpenCL;
 using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL4;
@@ -15,9 +18,10 @@ namespace OpenGL
     {
         private GLControl glControl;
 
-        private Shader lightingShader;
-        private Shader rimShader;
-        private Shader toonShader;
+        private StandardShader lightingShader;
+        private StandardShader rimShader;
+        private StandardShader toonShader;
+        private Shader CurrentShader;
 
         ICamera camera;
 
@@ -30,7 +34,8 @@ namespace OpenGL
 
         private Matrix4 projectionModel;
 
-        public ILamp lamp;
+
+        public OpenGL.ILamp lamp;
 
         IPrimitive3d box;
 
@@ -52,27 +57,12 @@ namespace OpenGL
 
             this.lamp = lamp;
 
-            //box = new BoxGeometry();
-
-
-
             //lightingShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader.frag");
 
+            //lightingShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader.frag");
+            //toonShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader.frag");
 
-            lightingShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader.frag");
-            toonShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader.frag");
-            // shader will be null here
-            box1 = new BoxFigure(1,1,1, new CustomColor(1,1,0,1), lightingShader);
-            box1 = new BoxFigure(1,0.5f ,2, new CustomColor(1, 0, 0, 1), toonShader);
-
-            
-            //float[] kasse = box.GetShape(new Vector3(0f, 0f, 0f), 1f, 1f, 1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
-            //float[] lampHolder = box.GetShape(lamp.Position, 0.1f, 0.1f, 0.1f, new CustomColor(0.01f, 0.1f, 0.01f, 1f));
-
-            //vertices = new float[lampHolder.Length + kasse.Length]; // showing box
-            //Array.Copy(lampHolder, vertices, lampHolder.Length);
-            //Array.Copy(kasse, 0, vertices, lampHolder.Length, kasse.Length);
-
+            //CurrentShader = new ToonShader();
 
         }
 
@@ -83,14 +73,31 @@ namespace OpenGL
             GL.ClearColor(0.0f, 0.4f, 0.6f, 1.0f);
             GL.Enable(EnableCap.DepthTest);
 
-            toonShader.LoadNewFragmentShader("C:/UnityProjects/OpenGL-Skole/simpleShader2.frag");
-            //toonShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader2.frag");
 
+            //// set values for Toon shader
+            //toonTestShader.SetMatrix4("view", camera.GetViewMatrix());
+            //toonTestShader.SetMatrix4("projection", projectionModel);
+            //toonTestShader.SetVec3("lightPosition", lamp.Position);
+
+
+
+            //toonShader.LoadNewFragmentShader("C:/UnityProjects/OpenGL-Skole/simpleShader2.frag");
+            //toonShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader2.frag");
+            float w = glControl.ClientSize.Width;
+            float h = glControl.ClientSize.Height;
+            
+            projectionModel = camera.GetProjectionMatrix(w, h);
+            viewModel = camera.GetViewMatrix();
+
+            CurrentShader = new PhongShader(ref viewModel, ref projectionModel, lamp);
+
+
+
+            // shader will be null here
+            box1 = new BoxFigure(1, 1, 1, new CustomColor(1, 1, 0, 1), CurrentShader);
+            box1 = new BoxFigure(1, 0.5f, 2, new CustomColor(1, 0, 0, 1), CurrentShader);
 
             LoadAllMeshes();
-
-            //lightingShader.Use();
-
         }
 
         private void LoadAllMeshes ()
@@ -103,7 +110,26 @@ namespace OpenGL
                 }
             }
         }
+        public void Render()
+        {
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
+
+            CurrentShader.SetMatrix4("view", camera.GetViewMatrix());
+            RenderAllMeshes();
+        }
+
+        private void RenderAllMeshes()
+        {
+            foreach (Object obj in Object.Objects)
+            {
+                if (obj is IHaveMesh mesh)
+                {
+                    mesh.RenderMesh();
+                }
+            }
+            glControl.SwapBuffers();
+        }
 
         public void Load2()
         {
@@ -238,24 +264,9 @@ namespace OpenGL
         }
 
 
-        public void Render()
-        {
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+  
 
-            RenderAllMeshes();
-        }
 
-        private void RenderAllMeshes()
-        {
-            foreach (Object obj in Object.Objects)
-            {
-                if (obj is IHaveMesh mesh)
-                {
-                    mesh.RenderMesh();
-                }
-            }
-            glControl.SwapBuffers();
-        }
 
         public void Render2()
         {
@@ -307,7 +318,7 @@ namespace OpenGL
                 lightingShader.SetVec3("lightColor", new Vector3(-1f, 1f, 2f));
                 lightingShader.SetVec3("lightPosition", lamp.Position);
 
-        
+
 
                 try { lightingShader.SetVec3("viewPos", camera.GetPosition); }
                 catch (Exception e) { }
@@ -326,7 +337,7 @@ namespace OpenGL
         public void ChangeLightingShader(Shader shaderName)
         {
 
-            lightingShader = shaderName;
+            lightingShader =(StandardShader) shaderName;
             lightingShader.Use();
             Render();
         }
