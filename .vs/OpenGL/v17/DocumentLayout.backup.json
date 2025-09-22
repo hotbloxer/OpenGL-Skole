@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\UnityProjects\\OpenGL-Skole\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\openglprocesses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:openglprocesses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\shaders\\texturedshader\\texturedshadercode.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:shaders\\texturedshader\\texturedshadercode.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\shaders\\texturedshader\\texturedshadercode.vs||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:shaders\\texturedshader\\texturedshadercode.vs||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\openglprocesses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|solutionrelative:openglprocesses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{11535783-CAC2-4EA6-B60E-9488962C3511}|OpenGL.csproj|c:\\unityprojects\\opengl-skole\\lighting.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
@@ -47,18 +47,17 @@
               "ViewState": "AgIAABsAAAAAAAAAAAAiwIYAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-03T19:18:30.215Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "OpenGLProcesses.cs",
               "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\OpenGLProcesses.cs",
               "RelativeDocumentMoniker": "OpenGLProcesses.cs",
               "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\OpenGLProcesses.cs",
               "RelativeToolTip": "OpenGLProcesses.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAAAFwAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAJUAAAAAAAAAAAAswLEAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-14T05:17:10.477Z",
               "IsPinned": true,
@@ -74,12 +73,11 @@
               "RelativeToolTip": "lighting.frag",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-09-22T19:33:32.969Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-22T19:33:32.969Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "TexturedShaderCode.vs",
               "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\Shaders\\TexturedShader\\TexturedShaderCode.vs",
               "RelativeDocumentMoniker": "Shaders\\TexturedShader\\TexturedShaderCode.vs",
@@ -87,21 +85,19 @@
               "RelativeToolTip": "Shaders\\TexturedShader\\TexturedShaderCode.vs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-09-22T19:31:00.9Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-22T19:31:00.9Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TexturedShaderCode.frag",
               "DocumentMoniker": "C:\\UnityProjects\\OpenGL-Skole\\Shaders\\TexturedShader\\TexturedShaderCode.frag",
               "RelativeDocumentMoniker": "Shaders\\TexturedShader\\TexturedShaderCode.frag",
-              "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\Shaders\\TexturedShader\\TexturedShaderCode.frag*",
-              "RelativeToolTip": "Shaders\\TexturedShader\\TexturedShaderCode.frag*",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACgAAAAEAAAAAAAAAA==",
+              "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\Shaders\\TexturedShader\\TexturedShaderCode.frag",
+              "RelativeToolTip": "Shaders\\TexturedShader\\TexturedShaderCode.frag",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACUAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-09-22T19:31:00.264Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-22T19:31:00.264Z"
             },
             {
               "$type": "Document",
@@ -113,8 +109,7 @@
               "RelativeToolTip": "Shaders\\TexturedShader\\TexturedShader.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-22T19:30:12.576Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-22T19:30:12.576Z"
             }
           ]
         }

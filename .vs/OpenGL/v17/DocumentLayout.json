@@ -47,8 +47,7 @@
               "ViewState": "AgIAABsAAAAAAAAAAAAiwIYAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-03T19:18:30.215Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -58,7 +57,7 @@
               "RelativeDocumentMoniker": "OpenGLProcesses.cs",
               "ToolTip": "C:\\UnityProjects\\OpenGL-Skole\\OpenGLProcesses.cs",
               "RelativeToolTip": "OpenGLProcesses.cs",
-              "ViewState": "AgIAAIEAAAAAAAAAAAD4v4QAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAJIAAAAAAAAAAAAswKkAAABXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-14T05:17:10.477Z",
               "IsPinned": true,
@@ -74,8 +73,7 @@
               "RelativeToolTip": "lighting.frag",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-09-22T19:33:32.969Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-22T19:33:32.969Z"
             },
             {
               "$type": "Document",
@@ -87,8 +85,7 @@
               "RelativeToolTip": "Shaders\\TexturedShader\\TexturedShaderCode.vs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-09-22T19:31:00.9Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-22T19:31:00.9Z"
             },
             {
               "$type": "Document",
@@ -100,8 +97,7 @@
               "RelativeToolTip": "Shaders\\TexturedShader\\TexturedShaderCode.frag",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAACUAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-09-22T19:31:00.264Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-22T19:31:00.264Z"
             },
             {
               "$type": "Document",
@@ -113,8 +109,7 @@
               "RelativeToolTip": "Shaders\\TexturedShader\\TexturedShader.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-22T19:30:12.576Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-22T19:30:12.576Z"
             }
           ]
         }

@@ -73,15 +73,6 @@ namespace OpenGL
             GL.Enable(EnableCap.DepthTest);
 
 
-            //// set values for Toon shader
-            //toonTestShader.SetMatrix4("view", camera.GetViewMatrix());
-            //toonTestShader.SetMatrix4("projection", projectionModel);
-            //toonTestShader.SetVec3("lightPosition", lamp.Position);
-
-
-
-            //toonShader.LoadNewFragmentShader("C:/UnityProjects/OpenGL-Skole/simpleShader2.frag");
-            //toonShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader2.frag");
             float w = glControl.ClientSize.Width;
             float h = glControl.ClientSize.Height;
             
@@ -91,6 +82,10 @@ namespace OpenGL
             //CurrentShader = new PhongShader(ref viewModel, ref projectionModel, lamp, camera);
             //CurrentShader = new ToonShader(ref viewModel, ref projectionModel, lamp);
             CurrentShader = new TexturedShader(ref viewModel, ref projectionModel, lamp, camera);
+
+            byte[] pixels = LoadTDA("C:/Users/p-hou/Desktop/Skole/Grafik/test.tga", 0);
+
+            CreateTexture(300, 300, false, pixels, 0);
 
 
             box1 = new BoxFigure(1, 1, 1, new CustomColor(1, 1, 0, 1), CurrentShader);
@@ -175,7 +170,11 @@ namespace OpenGL
                 byte[] pixels = new byte[header.height * header.width * colorChannels];
                 for (uint i = 0; i < header.height * header.width * colorChannels; i++)
                 {
-                    pixels[i] = (byte)bytes[i +18];
+                    
+
+                    if (i % 4 == 1)         pixels[i] = (byte)bytes[i + 20]; // red becomes blue 2 spots ahead
+                    else if (i % 4 == 3)    pixels[i] = (byte)bytes[i + 16]; // blue becomes red 2 spots behind
+                    else                    pixels[i] = (byte)bytes[i + 18]; // as usual
                 }
 
                 return pixels;
