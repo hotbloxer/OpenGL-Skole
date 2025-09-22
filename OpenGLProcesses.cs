@@ -18,7 +18,6 @@ namespace OpenGL
     {
         private GLControl glControl;
 
-        private StandardShader lightingShader;
         private StandardShader rimShader;
         private StandardShader toonShader;
         private Shader CurrentShader;
@@ -89,7 +88,7 @@ namespace OpenGL
             projectionModel = camera.GetProjectionMatrix(w, h);
             viewModel = camera.GetViewMatrix();
 
-            CurrentShader = new PhongShader(ref viewModel, ref projectionModel, lamp);
+            CurrentShader = new PhongShader(ref viewModel, ref projectionModel, lamp, camera);
 
 
 
@@ -129,67 +128,6 @@ namespace OpenGL
                 }
             }
             glControl.SwapBuffers();
-        }
-
-        public void Load2()
-        {
-            glControl.MakeCurrent();
-
-            GL.ClearColor(0.0f, 0.4f, 0.6f, 1.0f);
-
-            GL.Enable(EnableCap.DepthTest);
-
-            // lav en VBO
-            vertexBufferObject = GL.GenBuffer();
-
-            // bind bufferens type til VBO'en
-            // det her er lidt ligesom at sætte et stik i en server, så der er forbindelse mellem VBO og OpenGL
-            GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferObject);
-
-            // send dataen for VBO til OpenGL med BufferData
-            GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
-
-
-            // opret en VAO = vertexArrayobject
-            // denne beskriver hvilke floats i VBO'en der repræsentere hvad.
-            vertexArrayobject = GL.GenVertexArray();
-
-            GL.BindVertexArray(vertexArrayobject);
-
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 12 * sizeof(float), 0);
-            GL.EnableVertexAttribArray(0);
-
-            GL.VertexAttribPointer(1, 4, VertexAttribPointerType.Float, false, 12 * sizeof(float), 3 * sizeof(float));
-            GL.EnableVertexAttribArray(1);
-
-            GL.VertexAttribPointer(2, 3, VertexAttribPointerType.Float, false, 12 * sizeof(float), 7 * sizeof(float));
-            GL.EnableVertexAttribArray(2);
-
-            GL.VertexAttribPointer(3, 2, VertexAttribPointerType.Float, false, 12 * sizeof(float), 10 * sizeof(float));
-            GL.EnableVertexAttribArray(3);
-
-            viewModel = camera.GetViewMatrix();
-
-
-            byte[] pixels = LoadTDA("C:/Users/p-hou/Desktop/Skole/Grafik/test.tga", 0 );
-
-            CreateTexture(300, 300, false, pixels, 0);
-
-
-
-            float w = glControl.ClientSize.Width;
-            float h = glControl.ClientSize.Height;
-            projectionModel = camera.GetProjectionMatrix(w, h);
-
-            
-            lightingShader = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/lighting.frag");
-            rimShader = new("C:/UnityProjects/OpenGL-Skole/lighting_RimLight.vs", "C:/UnityProjects/OpenGL-Skole/lighting_RimLight.frag");
-            toonShader = new("C:/UnityProjects/OpenGL-Skole/cellShaded.vs", "C:/UnityProjects/OpenGL-Skole/cellShaded.frag");
-
-
-            lightingShader.Use();
-
-            
         }
 
         public int CreateTexture (int width, int height, bool alpha, byte[] pixels, ushort unit)
@@ -264,83 +202,9 @@ namespace OpenGL
         }
 
 
-  
+ 
 
 
-
-        public void Render2()
-        {
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            Matrix4 model = Matrix4.Identity;
-
-            if (rimShaderEnabled)
-            {
-                GL.DepthMask(false);
-
-                rimShader.SetMatrix4("model", Matrix4.CreateScale(1.2f));
-                rimShader.SetMatrix4("view", camera.GetViewMatrix());
-                rimShader.SetMatrix4("projection", projectionModel);
-
-                rimShader.Use();
-
-                GL.BindVertexArray(vertexArrayobject);
-
-                GL.DrawArrays(PrimitiveType.Triangles, 0, vertices.Length);
-
-                GL.DepthMask(true);
-            }
-
-
-            if (toonEnabled)
-            {
-
-                toonShader.SetMatrix4("model", model);
-                toonShader.SetMatrix4("view", camera.GetViewMatrix());
-                toonShader.SetMatrix4("projection", projectionModel);
-
-                toonShader.SetVec3("lightPosition", lamp.Position);
-
-                toonShader.Use();
-
-                GL.BindVertexArray(vertexArrayobject);
-
-                GL.DrawArrays(PrimitiveType.Triangles, 0, vertices.Length);
-            }
-
-            else
-            {
-                lightingShader.SetMatrix4("model", model);
-                lightingShader.SetMatrix4("view", camera.GetViewMatrix());
-                lightingShader.SetMatrix4("projection", projectionModel);
-
-                lightingShader.SetVec3("objectColor", new Vector3(1f, 1f, 0.3f));
-
-                lightingShader.SetVec3("lightColor", new Vector3(-1f, 1f, 2f));
-                lightingShader.SetVec3("lightPosition", lamp.Position);
-
-
-
-                try { lightingShader.SetVec3("viewPos", camera.GetPosition); }
-                catch (Exception e) { }
-
-                lightingShader.Use();
-
-                GL.BindVertexArray(vertexArrayobject);
-
-                GL.DrawArrays(PrimitiveType.Triangles, 0, vertices.Length);
-            }
-
-            glControl.SwapBuffers();
-        }
-
-
-        public void ChangeLightingShader(Shader shaderName)
-        {
-
-            lightingShader =(StandardShader) shaderName;
-            lightingShader.Use();
-            Render();
-        }
 
         public void ToggleRimLight(bool light)
         {
@@ -369,8 +233,6 @@ namespace OpenGL
         void Render();
 
         void Load();
-
-        void ChangeLightingShader(Shader shaderName);
 
         void ToggleRimLight(bool light);
 

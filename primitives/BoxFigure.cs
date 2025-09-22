@@ -49,7 +49,7 @@ namespace OpenGL.primitives
             float d = depth / 2;
 
             float[] verts =
-            {                                    //color                                          //Normal             //UV     
+            {     // position //color                                          //Normal             //UV     
                   -w, -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,  0.0f,  1.0f,     // Front face
                   +w, -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
                   +w, +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,  1.0f,  1.0f,

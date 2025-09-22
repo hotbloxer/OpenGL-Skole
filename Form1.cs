@@ -28,6 +28,7 @@ namespace OpenGL
 
             camera = new Camera(new Vector3(0.0f, 1.0f, 5.0f));
             lamp = new Lamp(new Vector3(0, 2f, -2));
+            lamp.Color = new Vector3(1, 1f, 1f);
 
 
             openGL = new OpenGLProcesses(glControl1, camera, lamp);
@@ -111,20 +112,13 @@ namespace OpenGL
             Phong.Enabled = false;
             Blinn.Enabled = true;
 
-            StandardShader phongShader = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/lightingPhong.frag");
-
-            //Shader phongShader = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/cellShaded.frag");
-
-            openGL.ChangeLightingShader(phongShader);
         }
 
         private void Blinn_Click(object sender, EventArgs e)
         {
             Phong.Enabled = true;
             Blinn.Enabled = false;
-            StandardShader blinnShader = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/lighting.frag");
 
-            openGL.ChangeLightingShader(blinnShader);
         }
 
         private void ToonShader_Click(object sender, EventArgs e)
@@ -133,9 +127,7 @@ namespace OpenGL
             Blinn.Enabled = true;
 
 
-            StandardShader CellShading = new("C:/UnityProjects/OpenGL-Skole/shader.vs", "C:/UnityProjects/OpenGL-Skole/cellShaded.frag");
 
-            openGL.ChangeLightingShader(CellShading);
         }
 
         private void RimLightEnabled(object sender, EventArgs e)

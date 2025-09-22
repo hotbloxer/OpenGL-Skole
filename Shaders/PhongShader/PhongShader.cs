@@ -15,12 +15,15 @@ namespace OpenGL.Shaders.PhongShader
         private readonly Matrix4 view;
         private readonly Matrix4 projection;
         private readonly OpenGL.ILamp lamp;
+        private readonly OpenGL.ICamera camera;
 
-        public PhongShader(ref Matrix4 view, ref Matrix4 projection, ILamp lamp) : base(vertexShaderPath, fragmentShaderPath)
+
+        public PhongShader(ref Matrix4 view, ref Matrix4 projection, ILamp lamp, ICamera camera) : base(vertexShaderPath, fragmentShaderPath)
         {
             this.view = view;
             this.projection = projection;
             this.lamp = lamp;
+            this.camera = camera;
         }
 
 
@@ -31,7 +34,9 @@ namespace OpenGL.Shaders.PhongShader
             SetMatrix4("view", view);
             SetMatrix4("projection", projection);
             SetVec3("lightPosition", lamp.Position);
-            SetVec4("lightColor", lamp.Color); 
+            SetVec3("lightColor", lamp.Color);
+            SetVec3("viewPosition", camera.GetPosition);
+
 
 
             base.Use();
