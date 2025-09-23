@@ -19,7 +19,7 @@ namespace OpenGL
         private GLControl glControl;
 
         private StandardShader rimShader;
-        private StandardShader toonShader;
+        private Shader toonShader;
         private Shader CurrentShader;
 
         ICamera camera;
@@ -40,6 +40,8 @@ namespace OpenGL
 
         Object box1;
         Object box2;
+        Object box3;
+
 
 
 
@@ -55,13 +57,6 @@ namespace OpenGL
             this.glControl = glControl;
 
             this.lamp = lamp;
-
-            //lightingShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader.frag");
-
-            //lightingShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader.frag");
-            //toonShader = new("C:/UnityProjects/OpenGL-Skole/simpleShader.vs", "C:/UnityProjects/OpenGL-Skole/simpleShader.frag");
-
-            //CurrentShader = new ToonShader();
 
         }
 
@@ -80,16 +75,27 @@ namespace OpenGL
             viewModel = camera.GetViewMatrix();
 
             //CurrentShader = new PhongShader(ref viewModel, ref projectionModel, lamp, camera);
-            //CurrentShader = new ToonShader(ref viewModel, ref projectionModel, lamp);
-            CurrentShader = new TexturedShader(ref viewModel, ref projectionModel, lamp, camera);
+            toonShader = new ToonShader(ref viewModel, ref projectionModel, lamp);
+            CurrentShader = new TexturedShader(ref viewModel, ref projectionModel, lamp, ref camera);
 
+            // custom texture
             byte[] pixels = LoadTDA("C:/Users/p-hou/Desktop/Skole/Grafik/test.tga", 0);
-
             CreateTexture(300, 300, false, pixels, 0);
 
+            // spect map
+            pixels = LoadTDA("C:/Users/p-hou/Desktop/Skole/Grafik/specular.tga", 1);
+            CreateTexture(300, 300, false, pixels, 1);
 
+
+            box2 = new BoxFigure(12, 5f, 1, new CustomColor(1, 0, 0, 1), CurrentShader);
             box1 = new BoxFigure(1, 1, 1, new CustomColor(1, 1, 0, 1), CurrentShader);
-            box1 = new BoxFigure(1, 0.5f, 2, new CustomColor(1, 0, 0, 1), CurrentShader);
+            
+            box3 = new BoxFigure(1, 0.5f, 2, new CustomColor(1, 1, 1, 1), CurrentShader);
+
+            Matrix4 moved = Matrix4.CreateTranslation(1,0,0);
+
+
+            box3.SetModelView(moved);
 
             LoadAllMeshes();
         }
@@ -129,7 +135,7 @@ namespace OpenGL
         {
             GL.ActiveTexture(TextureUnit.Texture0 + unit);
 
-            int textureID = 0;
+            int textureID;
             GL.CreateTextures(TextureTarget.Texture2D, 1, out textureID);
 
             GL.BindTexture(TextureTarget.Texture2D, textureID);
@@ -221,7 +227,7 @@ namespace OpenGL
 
         public void SetColor(Vector3 color)
         {
-
+            
         }
 
     }

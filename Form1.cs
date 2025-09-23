@@ -3,6 +3,7 @@ using OpenGL.Shaders;
 using OpenTK.GLControl;
 using OpenTK.Mathematics;
 using System;
+using Timer = System.Windows.Forms.Timer;
 
 
 namespace OpenGL
@@ -56,19 +57,43 @@ namespace OpenGL
             {
                 e.Handled = true;
             }
+
+           
+
+
         }
+
+        
 
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            openGL.Render();
+          
         }
 
 
         private void Load()
         {
+
+            // timer was Copilots idea
+            Timer timer = new Timer();
+            timer.Interval = 16; // ~60 FPS
+            timer.Tick += (s, e) =>
+            {
+                Update();
+                camera.UpdateCameraRotation(new Vector2(Cursor.Position.X, Cursor.Position.Y));
+
+                openGL.Render();
+            };
+
+
+            timer.Start();
+
             openGL.Load();
         }
+
+
+
 
         private void glControl1_Load(object sender, EventArgs e)
         {

@@ -13,7 +13,7 @@ namespace OpenGL
 
         public readonly Vector3 Position;
 
-        public readonly Matrix4 modelView; 
+        protected Matrix4 modelView; 
 
         public Object() 
         {
@@ -27,6 +27,10 @@ namespace OpenGL
             SetObject(this);
         }
 
+        public void SetModelView(Matrix4 newView)
+        {
+            modelView = newView;    
+        }
 
         private void SetObject(Object obj)
         {

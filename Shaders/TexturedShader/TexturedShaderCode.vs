@@ -24,8 +24,12 @@ void main()
 	uv = aUV;
 
 	// virker ikke men er korrekt beregnet
-	//gl_Position =  projection * view  * model* vec4(aPos, 1.0);
-	gl_Position =  vec4(aPos, 1.0) * model* view * projection;
+	gl_Position =  projection * view  * model * vec4(aPos, 1.0);
+
+
+
+
+	//gl_Position =  vec4(aPos, 1.0) * model* view * projection; // den her virker til dels
 
     fragmentPosition = vec3(model * vec4(aPos, 1.0));
 }
