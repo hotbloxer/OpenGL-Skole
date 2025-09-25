@@ -24,9 +24,6 @@ namespace OpenGL
             hScrollBar1.Minimum = 0;
             hScrollBar1.Maximum = 360;
 
-            bool BlinnEnabled = true;
-            Blinn.Enabled = false;
-
             camera = new Camera(new Vector3(0.0f, 1.0f, 5.0f));
             lamp = new Lamp(new Vector3(0, 2f, -2));
             lamp.Color = new Vector3(1, 1f, 1f);
@@ -58,17 +55,17 @@ namespace OpenGL
                 e.Handled = true;
             }
 
-           
+
 
 
         }
 
-        
+
 
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-          
+
         }
 
 
@@ -134,22 +131,19 @@ namespace OpenGL
 
         private void Phong_Click(object sender, EventArgs e)
         {
-            Phong.Enabled = false;
-            Blinn.Enabled = true;
+
 
         }
 
         private void Blinn_Click(object sender, EventArgs e)
         {
-            Phong.Enabled = true;
-            Blinn.Enabled = false;
+
 
         }
 
         private void ToonShader_Click(object sender, EventArgs e)
         {
-            Phong.Enabled = false;
-            Blinn.Enabled = true;
+
 
 
 
@@ -157,12 +151,22 @@ namespace OpenGL
 
         private void RimLightEnabled(object sender, EventArgs e)
         {
-            openGL.ToggleRimLight(RimLight.Checked);
+
         }
 
         private void ToonState(object sender, EventArgs e)
         {
-            openGL.SetToonShading(checkBoxToon.Checked);
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

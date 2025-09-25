@@ -31,15 +31,21 @@ namespace OpenGL
         private void InitializeComponent()
         {
             glControl1 = new GLControl();
-            Phong = new Button();
+            tabControl1 = new TabControl();
+            tabPage1 = new TabPage();
+            tabPage2 = new TabPage();
+            tabPage3 = new TabPage();
+            label1 = new Label();
             hScrollBar1 = new HScrollBar();
-            Blinn = new Button();
-            RimLight = new CheckBox();
-            checkBoxToon = new CheckBox();
-            colorDialog1 = new ColorDialog();
-            textBoxRed = new TextBox();
-            textBoxGreen = new TextBox();
-            textBoxBlue = new TextBox();
+            tabPage4 = new TabPage();
+            checkBox1 = new CheckBox();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage3.SuspendLayout();
+            tabPage4.SuspendLayout();
             SuspendLayout();
             // 
             // glControl1
@@ -57,110 +63,150 @@ namespace OpenGL
             glControl1.Load += glControl1_Load;
             glControl1.Paint += glControl1_Paint;
             // 
-            // Phong
+            // tabControl1
             // 
-            Phong.Location = new Point(586, 12);
-            Phong.Name = "Phong";
-            Phong.Size = new Size(112, 34);
-            Phong.TabIndex = 2;
-            Phong.Text = "Phong";
-            Phong.UseVisualStyleBackColor = true;
-            Phong.Click += Phong_Click;
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage4);
+            tabControl1.Location = new Point(586, 12);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(479, 426);
+            tabControl1.TabIndex = 12;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(button3);
+            tabPage1.Controls.Add(button2);
+            tabPage1.Controls.Add(button1);
+            tabPage1.Location = new Point(4, 34);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(471, 388);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Shaders";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Location = new Point(4, 34);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(471, 388);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Objects";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(label1);
+            tabPage3.Controls.Add(hScrollBar1);
+            tabPage3.Location = new Point(4, 34);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Size = new Size(471, 388);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "Light";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(21, 18);
+            label1.Name = "label1";
+            label1.Size = new Size(125, 25);
+            label1.TabIndex = 1;
+            label1.Text = "Light direction";
+            label1.Click += label1_Click;
             // 
             // hScrollBar1
             // 
-            hScrollBar1.Location = new Point(586, 399);
+            hScrollBar1.Location = new Point(21, 43);
             hScrollBar1.Name = "hScrollBar1";
-            hScrollBar1.Size = new Size(210, 39);
-            hScrollBar1.TabIndex = 4;
-            hScrollBar1.ValueChanged += hScrollBar1_ValueChanged;
+            hScrollBar1.Size = new Size(401, 39);
+            hScrollBar1.TabIndex = 0;
             // 
-            // Blinn
+            // tabPage4
             // 
-            Blinn.Location = new Point(734, 12);
-            Blinn.Name = "Blinn";
-            Blinn.Size = new Size(112, 34);
-            Blinn.TabIndex = 5;
-            Blinn.Text = "Blinn";
-            Blinn.UseVisualStyleBackColor = true;
-            Blinn.Click += Blinn_Click;
+            tabPage4.Controls.Add(checkBox1);
+            tabPage4.Location = new Point(4, 34);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Size = new Size(471, 388);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "Camera";
+            tabPage4.UseVisualStyleBackColor = true;
             // 
-            // RimLight
+            // checkBox1
             // 
-            RimLight.AutoSize = true;
-            RimLight.Location = new Point(586, 87);
-            RimLight.Name = "RimLight";
-            RimLight.Size = new Size(116, 29);
-            RimLight.TabIndex = 7;
-            RimLight.Text = "RimLight?";
-            RimLight.UseVisualStyleBackColor = true;
-            RimLight.CheckedChanged += RimLightEnabled;
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(12, 16);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(121, 29);
+            checkBox1.TabIndex = 0;
+            checkBox1.Text = "checkBox1";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
-            // checkBoxToon
+            // button1
             // 
-            checkBoxToon.AutoSize = true;
-            checkBoxToon.Location = new Point(584, 132);
-            checkBoxToon.Name = "checkBoxToon";
-            checkBoxToon.Size = new Size(130, 29);
-            checkBoxToon.TabIndex = 8;
-            checkBoxToon.Text = "TooShader?";
-            checkBoxToon.UseVisualStyleBackColor = true;
-            checkBoxToon.CheckedChanged += ToonState;
+            button1.Location = new Point(22, 23);
+            button1.Name = "button1";
+            button1.Size = new Size(112, 34);
+            button1.TabIndex = 0;
+            button1.Text = "Blinn+P";
+            button1.UseVisualStyleBackColor = true;
             // 
-            // textBoxRed
+            // button2
             // 
-            textBoxRed.Location = new Point(595, 347);
-            textBoxRed.Name = "textBoxRed";
-            textBoxRed.Size = new Size(66, 31);
-            textBoxRed.TabIndex = 9;
+            button2.Location = new Point(160, 23);
+            button2.Name = "button2";
+            button2.Size = new Size(112, 34);
+            button2.TabIndex = 1;
+            button2.Text = "Toon";
+            button2.UseVisualStyleBackColor = true;
             // 
-            // textBoxGreen
+            // button3
             // 
-            textBoxGreen.Location = new Point(667, 347);
-            textBoxGreen.Name = "textBoxGreen";
-            textBoxGreen.Size = new Size(63, 31);
-            textBoxGreen.TabIndex = 10;
-            // 
-            // textBoxBlue
-            // 
-            textBoxBlue.Location = new Point(736, 347);
-            textBoxBlue.Name = "textBoxBlue";
-            textBoxBlue.Size = new Size(60, 31);
-            textBoxBlue.TabIndex = 11;
+            button3.Location = new Point(297, 23);
+            button3.Name = "button3";
+            button3.Size = new Size(112, 34);
+            button3.TabIndex = 2;
+            button3.Text = "Blinn + tex";
+            button3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1077, 490);
-            Controls.Add(textBoxBlue);
-            Controls.Add(textBoxGreen);
-            Controls.Add(textBoxRed);
-            Controls.Add(checkBoxToon);
-            Controls.Add(RimLight);
-            Controls.Add(Blinn);
-            Controls.Add(hScrollBar1);
-            Controls.Add(Phong);
+            Controls.Add(tabControl1);
             Controls.Add(glControl1);
             DoubleBuffered = true;
             KeyPreview = true;
             Name = "Form1";
             Text = "Form1";
             Paint += Form1_Paint;
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
+            tabPage4.ResumeLayout(false);
+            tabPage4.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
         private OpenTK.GLControl.GLControl glControl1;
-        private Button Phong;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private TabPage tabPage3;
+        private TabPage tabPage4;
+        private CheckBox checkBox1;
         private HScrollBar hScrollBar1;
-        private Button Blinn;
-        private CheckBox RimLight;
-        private CheckBox checkBoxToon;
-        private ColorDialog colorDialog1;
-        private TextBox textBoxRed;
-        private TextBox textBoxGreen;
-        private TextBox textBoxBlue;
+        private Label label1;
+        private Button button3;
+        private Button button2;
+        private Button button1;
     }
 }

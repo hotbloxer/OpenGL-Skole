@@ -79,11 +79,11 @@ namespace OpenGL
             CurrentShader = new TexturedShader(ref viewModel, ref projectionModel, lamp, ref camera);
 
             // custom texture
-            byte[] pixels = LoadTDA("C:/Users/p-hou/Desktop/Skole/Grafik/test.tga", 0);
+            byte[] pixels = LoadTDA("C:\\UnityProjects\\OpenGL-Skole\\Shaders\\Textures\\test.tga", 0);
             CreateTexture(300, 300, false, pixels, 0);
 
             // spect map
-            pixels = LoadTDA("C:/Users/p-hou/Desktop/Skole/Grafik/specular.tga", 1);
+            pixels = LoadTDA("C:\\UnityProjects\\OpenGL-Skole\\Shaders\\Textures\\specular.tga", 1);
             CreateTexture(300, 300, false, pixels, 1);
 
 
@@ -155,6 +155,7 @@ namespace OpenGL
 
         public byte[] LoadTDA (string fileName, ushort unit)
         {
+            if (!File.Exists(fileName)) return null;
             byte[] bytes = File.ReadAllBytes(fileName);
             if (bytes!= null)
             {
