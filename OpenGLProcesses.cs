@@ -8,7 +8,9 @@ using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System;
+using System.Reflection.Metadata;
 using System.Windows.Forms;
+using static System.Formats.Asn1.AsnWriter;
 
 
 
@@ -71,33 +73,26 @@ namespace OpenGL
             float w = glControl.ClientSize.Width;
             float h = glControl.ClientSize.Height;
             
-            projectionModel = camera.GetProjectionMatrix(w, h);
-            viewModel = camera.GetViewMatrix();
+            projectionModel = camera.GetProjectionMatrix();
+            
 
             //CurrentShader = new PhongShader(ref viewModel, ref projectionModel, lamp, camera);
             toonShader = new ToonShader(ref viewModel, ref projectionModel, lamp);
-            CurrentShader = new TexturedShader(ref viewModel, ref projectionModel, lamp, ref camera);
-
-            // custom texture
-            byte[] pixels = LoadTDA("C:\\UnityProjects\\OpenGL-Skole\\Shaders\\Textures\\test.tga", 0);
-            CreateTexture(300, 300, false, pixels, 0);
-
-            // spect map
-            pixels = LoadTDA("C:\\UnityProjects\\OpenGL-Skole\\Shaders\\Textures\\specular.tga", 1);
-            CreateTexture(300, 300, false, pixels, 1);
+            CurrentShader = new TexturedShader(lamp, ref camera);
 
 
-            box2 = new BoxFigure(12, 5f, 1, new CustomColor(1, 0, 0, 1), CurrentShader);
+           
             box1 = new BoxFigure(1, 1, 1, new CustomColor(1, 1, 0, 1), CurrentShader);
+            box2 = new BoxFigure(1, 1f, 1, new CustomColor(1, 0, 0, 1), CurrentShader);
             
-            box3 = new BoxFigure(1, 0.5f, 2, new CustomColor(1, 1, 1, 1), CurrentShader);
 
             Matrix4 moved = Matrix4.CreateTranslation(1,0,0);
 
 
-            box3.SetModelView(moved);
+            box2.SetModelView(moved);
 
             LoadAllMeshes();
+            Render();
         }
 
         private void LoadAllMeshes ()
@@ -112,10 +107,34 @@ namespace OpenGL
         }
         public void Render()
         {
+        
+            byte[] pixels;
+            //custom texture
+            pixels = LoadTDA("C:\\UnityProjects\\OpenGL-Skole\\Shaders\\Textures\\test.tga", 0);
+            CreateTexture(300, 300, false, pixels, 0);
+            CurrentShader.SetInt("textureMap", 0);
+
+            // spect map
+            pixels = LoadTDA("C:\\UnityProjects\\OpenGL-Skole\\Shaders\\Textures\\specular.tga", 1);
+            CreateTexture(300, 300, false, pixels, 1);
+            CurrentShader.SetInt("specularMap", 1);
+
+
+
+            //Light map
+            byte[] lightMap = LoadTDA("C:\\UnityProjects\\OpenGL-Skole\\Shaders\\Textures\\lightmap.tga", 2);
+            CreateTexture(300, 300, false, lightMap, 2);
+            CurrentShader.SetInt("lightMap", 2);
+
+            //// Normal map
+            //byte[] normalMap = LoadTDA("C:\\UnityProjects\\OpenGL-Skole\\Shaders\\Textures\\NormalMap.tga", 3);
+            //CreateTexture(300, 300, false, normalMap, 3);
+            //CurrentShader.SetInt("texture1", 3);
+
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-
             CurrentShader.SetMatrix4("view", camera.GetViewMatrix());
+
             RenderAllMeshes();
         }
 
@@ -131,8 +150,9 @@ namespace OpenGL
             glControl.SwapBuffers();
         }
 
-        public int CreateTexture (int width, int height, bool alpha, byte[] pixels, ushort unit)
-        {
+        public int CreateTexture (int width, int height, bool alpha, byte[] pixels, int unit)
+        { 
+
             GL.ActiveTexture(TextureUnit.Texture0 + unit);
 
             int textureID;
@@ -145,7 +165,7 @@ namespace OpenGL
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) TextureWrapMode.Repeat);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
 
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
 
             return textureID;

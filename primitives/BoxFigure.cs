@@ -29,17 +29,6 @@ namespace OpenGL.primitives
 
             shader.SetMatrix4("model", modelView);
 
-            Matrix4 tes1 = Matrix4.Identity;
-            Matrix4 test2 = Matrix4.Identity;
-            Lamp test4 = new Lamp(new Vector3(1, 1, 1));
-            ICamera test5 = new Camera(new(1,1,1)); 
-
-            if (shader.GetType() == new TexturedShader(ref tes1, ref test2,  test4, ref test5).GetType())
-            {
-                TexturedShader test = (TexturedShader) shader;
-                test.Use(modelView);
-            }
-
             meshBuffer.RenderMesh();
             shader.Use();
 
@@ -47,10 +36,8 @@ namespace OpenGL.primitives
 
         public void LoadMesh ()
         {
-            
             meshBuffer.LoadMesh();
             shader.Init();
-
         }
 
 
@@ -69,7 +56,7 @@ namespace OpenGL.primitives
                   -w, +h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,  0.0f,  1.0f,
                   -w, -h, -d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
 
-                  -w, -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,  0.0f,  1.0f,      // Back face
+                  -w, -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,  0.0f,  0.0f,      // Back face
                   +w, -h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
                   +w, +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
                   +w, +h,  d, color.Red, color.Green, color.Blue, color.Alpha, 0.0f,  0.0f,  1.0f,  1.0f,  1.0f,

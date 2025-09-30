@@ -33,15 +33,15 @@ namespace OpenGL
             glControl1 = new GLControl();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            button3 = new Button();
+            button2 = new Button();
+            button1 = new Button();
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
             label1 = new Label();
             hScrollBar1 = new HScrollBar();
             tabPage4 = new TabPage();
             checkBox1 = new CheckBox();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage3.SuspendLayout();
@@ -62,6 +62,7 @@ namespace OpenGL
             glControl1.TabIndex = 0;
             glControl1.Load += glControl1_Load;
             glControl1.Paint += glControl1_Paint;
+            glControl1.KeyPress += glControl1_KeyPress_1;
             // 
             // tabControl1
             // 
@@ -87,6 +88,33 @@ namespace OpenGL
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Shaders";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(297, 23);
+            button3.Name = "button3";
+            button3.Size = new Size(112, 34);
+            button3.TabIndex = 2;
+            button3.Text = "Blinn + tex";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(160, 23);
+            button2.Name = "button2";
+            button2.Size = new Size(112, 34);
+            button2.TabIndex = 1;
+            button2.Text = "Toon";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(22, 23);
+            button1.Name = "button1";
+            button1.Size = new Size(112, 34);
+            button1.TabIndex = 0;
+            button1.Text = "Blinn+P";
+            button1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -147,33 +175,6 @@ namespace OpenGL
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
-            // button1
-            // 
-            button1.Location = new Point(22, 23);
-            button1.Name = "button1";
-            button1.Size = new Size(112, 34);
-            button1.TabIndex = 0;
-            button1.Text = "Blinn+P";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(160, 23);
-            button2.Name = "button2";
-            button2.Size = new Size(112, 34);
-            button2.TabIndex = 1;
-            button2.Text = "Toon";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(297, 23);
-            button3.Name = "button3";
-            button3.Size = new Size(112, 34);
-            button3.TabIndex = 2;
-            button3.Text = "Blinn + tex";
-            button3.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -186,6 +187,7 @@ namespace OpenGL
             Name = "Form1";
             Text = "Form1";
             Paint += Form1_Paint;
+            KeyPress += glControl1_KeyPress_1;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage3.ResumeLayout(false);

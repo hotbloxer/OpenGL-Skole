@@ -3,7 +3,12 @@ using OpenGL.Shaders;
 using OpenTK.GLControl;
 using OpenTK.Mathematics;
 using System;
+using System;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
+
+
 
 
 namespace OpenGL
@@ -19,49 +24,24 @@ namespace OpenGL
 
         public Form1()
         {
+            //ConsoleHelper.AllocConsole();
+            Console.WriteLine("Console attached!");
+
+
             InitializeComponent();
 
             hScrollBar1.Minimum = 0;
             hScrollBar1.Maximum = 360;
 
-            camera = new Camera(new Vector3(0.0f, 1.0f, 5.0f));
-            lamp = new Lamp(new Vector3(0, 2f, -2));
+            lamp = new Lamp(new Vector3(0, 2f, 2));
             lamp.Color = new Vector3(1, 1f, 1f);
 
+            int w = glControl1.ClientSize.Width;
+            int h = glControl1.ClientSize.Height;
+            camera = new Camera(new Vector3(0.0f, 1.0f, 5.0f), w, h);
 
             openGL = new OpenGLProcesses(glControl1, camera, lamp);
-
-            this.KeyPreview = true; // Let the form receive key events
-            this.KeyPress += new KeyPressEventHandler(Keypressed);
         }
-
-
-        private void Keypressed(System.Object o, KeyPressEventArgs e)
-        {
-            // The keypressed method uses the KeyChar property to check 
-            // whether the ENTER key is pressed. 
-
-            if (e.KeyChar == 'w') camera.UpdateCameraMovement(ICamera.CameraMovement.UP);
-            else if (e.KeyChar == 'a') camera.UpdateCameraMovement(ICamera.CameraMovement.LEFT);
-            else if (e.KeyChar == 'd') camera.UpdateCameraMovement(ICamera.CameraMovement.RIGHT);
-            if (e.KeyChar == 's') camera.UpdateCameraMovement(ICamera.CameraMovement.DOWN);
-
-            openGL.Render();
-
-            // If the ENTER key is pressed, the Handled property is set to true, 
-            // to indicate the event is handled.
-            if (e.KeyChar == (char)Keys.Return)
-            {
-                e.Handled = true;
-            }
-
-
-
-
-        }
-
-
-
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -72,21 +52,31 @@ namespace OpenGL
         private void Load()
         {
 
-            // timer was Copilots idea
-            Timer timer = new Timer();
+     
+        AllocConsole();
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
+
+        // timer was Copilots idea
+        Timer timer = new Timer();
             timer.Interval = 16; // ~60 FPS
             timer.Tick += (s, e) =>
             {
                 Update();
-                camera.UpdateCameraRotation(new Vector2(Cursor.Position.X, Cursor.Position.Y));
+                //camera.UpdateCameraRotation(new Vector2(Cursor.Position.X, Cursor.Position.Y));
 
                 openGL.Render();
             };
 
-
             timer.Start();
 
             openGL.Load();
+
+            glControl1.Focus();
+
+            this.Focus();
         }
 
 
@@ -102,28 +92,8 @@ namespace OpenGL
             openGL.Render();
         }
 
-
-        private void glControl1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
         private void glControl1_Paint(object sender, PaintEventArgs e)
         {
-            openGL.Render();
-        }
-
-        private void hScrollBar1_ValueChanged(object sender, EventArgs e)
-        {
-            float progressValue = hScrollBar1.Value; // vinkel degree 0 - 360
-
-            float xLocation = (float)Math.Cos(MathHelper.DegreesToRadians(progressValue));
-            float yLocation = (float)Math.Sin(MathHelper.DegreesToRadians(progressValue));
-
-            Vector3 newLocation = new(xLocation, lamp.Position.Y, yLocation);
-
-            lamp.Position = newLocation;
-
             openGL.Render();
         }
 
@@ -153,6 +123,19 @@ namespace OpenGL
         {
 
         }
+        private void hScrollBar1_ValueChanged(object sender, EventArgs e)
+        {
+            float progressValue = hScrollBar1.Value; // vinkel degree 0 - 360
+
+            float xLocation = (float)Math.Cos(MathHelper.DegreesToRadians(progressValue));
+            float yLocation = (float)Math.Sin(MathHelper.DegreesToRadians(progressValue));
+
+            Vector3 newLocation = new(xLocation, lamp.Position.Y, yLocation);
+
+            lamp.Position = newLocation;
+
+            openGL.Render();
+        }
 
         private void ToonState(object sender, EventArgs e)
         {
@@ -165,6 +148,31 @@ namespace OpenGL
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void glControl1_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            // The keypressed method uses the KeyChar property to check 
+            // whether the ENTER key is pressed. 
+
+            if (e.KeyChar == 'w') camera.UpdateCameraMovement(ICamera.CameraMovement.UP);
+            else if (e.KeyChar == 'a') camera.UpdateCameraMovement(ICamera.CameraMovement.LEFT);
+            else if (e.KeyChar == 'd') camera.UpdateCameraMovement(ICamera.CameraMovement.RIGHT);
+            if (e.KeyChar == 's') camera.UpdateCameraMovement(ICamera.CameraMovement.DOWN);
+
+            openGL.Render();
+
+            // If the ENTER key is pressed, the Handled property is set to true, 
+            // to indicate the event is handled.
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
 
         }

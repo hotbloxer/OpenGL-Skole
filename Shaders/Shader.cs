@@ -70,7 +70,12 @@ namespace OpenGL.Shaders
         {
             Handle = GL.CreateProgram();
             int vertexShader = LoadVertexShader();
+            ValidateShaderProgram(vertexShader);
+
             int fragmentShader = LoadFragmentShader();
+            ValidateShaderProgram(fragmentShader);
+
+
 
             LinkProgram(Handle);
 
@@ -100,6 +105,13 @@ namespace OpenGL.Shaders
             }
         }
 
+
+        public void SetInt(string name, int value)
+        {
+            GL.UseProgram(Handle);
+            GL.Uniform1(uniformsInShader[name], value);
+        }
+
         public void SetVec3 (string name, Vector3 value)
         {
             GL.UseProgram(Handle);
@@ -112,33 +124,44 @@ namespace OpenGL.Shaders
             GL.Uniform4(uniformsInShader[name], ref value);
         }
 
-
-
         public void CompileShader (int shader)
         {
             // try to compile shader
             GL.CompileShader(shader);
 
+
+
+
             GL.GetShader(shader, ShaderParameter.CompileStatus, out var code);
             if (code != (int) All.True) // Todo, spørg søren om den her all
             {
-                
                 var infoLog = GL.GetShaderInfoLog(shader);
                 throw new Exception($"Error occurred whilst compiling Shader({shader}).\n\n{infoLog}");
+            }
+        }
+
+        private void ValidateShaderProgram(int shaderHandle)
+        {
+            
+            GL.ValidateProgram(Handle);
+
+            // Check if validation was successful
+            GL.GetShader(shaderHandle, ShaderParameter.CompileStatus, out int status);
+            {
+                if (status == 0)
+                {
+                    throw new (GL.GetShaderInfoLog(shaderHandle));
+                    Console.WriteLine((string) GL.GetShaderInfoLog(shaderHandle));
+                }
             }
 
         }
 
-
-        
         public virtual void Use()
         {
             GL.UseProgram(Handle);
 
         }
-
-
-
 
         private static void LinkProgram(int program)
         {
@@ -147,10 +170,10 @@ namespace OpenGL.Shaders
 
             // Check for linking errors
             GL.GetProgram(program, GetProgramParameterName.LinkStatus, out var code);
-            if (code != (int)All.True)
+            if (code != (int) All.True)
             {
                 // We can use `GL.GetProgramInfoLog(program)` to get information about the error.
-                throw new Exception($"Error occurred whilst linking Program({program})");
+                throw new Exception($"Error occurred whilst linking Program({program}), Error code({code})");
             }
         }
 
@@ -159,6 +182,7 @@ namespace OpenGL.Shaders
             GL.UseProgram(Handle);
             GL.UniformMatrix4(uniformsInShader[name], true, ref data);
         }
+
 
     }
 

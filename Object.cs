@@ -21,11 +21,6 @@ namespace OpenGL
             Position = Vector3.Zero;
             SetObject(this);
         }
-        public Object(Vector3 position)
-        {
-            Position = position;
-            SetObject(this);
-        }
 
         public void SetModelView(Matrix4 newView)
         {

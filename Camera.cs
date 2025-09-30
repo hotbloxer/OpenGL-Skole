@@ -26,6 +26,9 @@ namespace OpenGL
         private Vector3 up = Vector3.UnitY;
         private Vector3 front = -Vector3.UnitZ;
 
+        private int width;
+        private int height;
+
 
 
         public Vector3 GetPosition { get => cameraPosition;}
@@ -34,17 +37,18 @@ namespace OpenGL
         public Vector3 GetDirection { get => cameraDirection;}
         Vector3 ICamera.SetPosition { set => cameraPosition = value; }
 
-        public Camera (Vector3 position)
+        public Camera (Vector3 position, int width, int height)
         {
             cameraDirection = Vector3.Normalize(cameraPosition - cameraDirection); // actually pointing in the opposite way of view dir
             this.cameraPosition = position;
-
+            this.width = width;
+            this.height = height;
         }
 
 
         public Matrix4 GetViewMatrix()
         {
-       
+            Matrix4 test = Matrix4.LookAt(cameraPosition, cameraPosition + front, Vector3.Normalize(up));
             return Matrix4.LookAt(cameraPosition, cameraPosition + front, Vector3.Normalize(up));
         }
 
@@ -60,7 +64,7 @@ namespace OpenGL
 
 
 
-        public Matrix4 GetProjectionMatrix (float width, float height)
+        public Matrix4 GetProjectionMatrix ()
         {
             
             return Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), width / height, 0.1f, 10000.0f);
@@ -145,7 +149,7 @@ namespace OpenGL
 
         void UpdateCameraMovement(CameraMovement movement);
         void UpdateCameraRotation(Vector2 cursorCoordinates);
-        Matrix4 GetProjectionMatrix(float width, float height);
+        Matrix4 GetProjectionMatrix();
         Matrix4 GetViewMatrix();
 
         public enum CameraMovement { UP, DOWN, LEFT, RIGHT };

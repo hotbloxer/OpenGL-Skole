@@ -52,7 +52,6 @@ C:\UnityProjects\OpenGL-Skole\bin\Debug\net8.0-windows\runtimes\osx-arm64\native
 C:\UnityProjects\OpenGL-Skole\bin\Debug\net8.0-windows\runtimes\osx-x64\native\libglfw.3.dylib
 C:\UnityProjects\OpenGL-Skole\bin\Debug\net8.0-windows\runtimes\win-x86\native\glfw3.dll
 C:\UnityProjects\OpenGL-Skole\obj\Debug\net8.0-windows\OpenGL.csproj.AssemblyReference.cache
-C:\UnityProjects\OpenGL-Skole\obj\Debug\net8.0-windows\OpenGL.Form1.resources
 C:\UnityProjects\OpenGL-Skole\obj\Debug\net8.0-windows\OpenGL.csproj.GenerateResource.cache
 C:\UnityProjects\OpenGL-Skole\obj\Debug\net8.0-windows\OpenGL.GeneratedMSBuildEditorConfig.editorconfig
 C:\UnityProjects\OpenGL-Skole\obj\Debug\net8.0-windows\OpenGL.AssemblyInfoInputs.cache
@@ -65,3 +64,4 @@ C:\UnityProjects\OpenGL-Skole\obj\Debug\net8.0-windows\refint\OpenGL.dll
 C:\UnityProjects\OpenGL-Skole\obj\Debug\net8.0-windows\OpenGL.pdb
 C:\UnityProjects\OpenGL-Skole\obj\Debug\net8.0-windows\OpenGL.genruntimeconfig.cache
 C:\UnityProjects\OpenGL-Skole\obj\Debug\net8.0-windows\ref\OpenGL.dll
+C:\UnityProjects\OpenGL-Skole\obj\Debug\net8.0-windows\OpenGL.Form1.resources
